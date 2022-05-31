@@ -7,7 +7,6 @@ import "./login.css";
 import msgNotify, { SccMsg , ErrMsg} from './../../../util/notify';
 import globals from "../../../util/globals";
 import jwtAxios from "../../../util/jwtAxios";
-import { Details } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 function Login(): JSX.Element {
@@ -21,7 +20,12 @@ function Login(): JSX.Element {
         jwtAxios.post(globals.urls.login, details)
         .then(response => {
             msgNotify.success(SccMsg.LOGIN_APPROVED)
-            navigate("/");
+            if(details.clientType.toLowerCase()==="admin")
+                navigate("/admin/adminMainPage");
+            if(details.clientType.toLowerCase()==="company")
+                navigate("/company/companyMainPage");
+            if(details.clientType.toLowerCase()==="customer")
+                navigate("/customer/customerMainPage");
         })
         .catch(err => {
             msgNotify.error(err.response.data.details);

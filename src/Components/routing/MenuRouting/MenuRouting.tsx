@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AddCompany from "../../mainLayout/admin/addCompany/addCompany";
 import AddCustomer from "../../mainLayout/admin/addCustomer/addCustomer";
+import AdminMainPage from "../../mainLayout/admin/adminMainPage/adminMainPage";
 import DeleteCompany from "../../mainLayout/admin/deleteCompany/deleteCompany";
 import DeleteCustomer from "../../mainLayout/admin/deleteCustomer/deleteCustomer";
 import GetAllCompanies from "../../mainLayout/admin/getAllCompanies/getAllCompanies";
@@ -25,12 +26,15 @@ import MyMainPage from "../../mainLayout/myMainPage/myMainPage";
 import Login from "../../user/login/login";
 import Page404 from "../../user/page404/page404";
 import "./MenuRouting.css";
+import CompanyMainPage from './../../mainLayout/company/companyMainPage/companyMainPage';
+import CustomerMainPage from "../../mainLayout/customer/customerMainPage/customerMainPage";
 
 function MenuRouting(): JSX.Element {
     return (
         <div className="MenuRouting">
 			<Routes>
                 <Route path="/" element={<MyMainPage/>}/>
+                <Route path="admin/adminMainPage" element={<AdminMainPage/>}/>
                 <Route path="admin/addCompany" element={<AddCompany/>}/>
                 <Route path="admin/addCustomer" element={<AddCustomer/>}/>
                 <Route path="admin/deleteCompany" element={<DeleteCompany/>}/>
@@ -43,6 +47,7 @@ function MenuRouting(): JSX.Element {
                 <Route path="admin/updateCustomer" element={<UpdateCustomer/>}/>
 
                 {/* company */}
+                <Route path="company/companyMainPage" element={<CompanyMainPage/>}/>
                 <Route path="company/addCoupon" element={<AddCoupon/>}/>
                 <Route path="company/deleteCoupon" element={<DeleteCoupon/>}/>
                 <Route path="company/getAllCompanyCoupons" element={<GetAllCompanyCoupons/>}/>
@@ -52,6 +57,7 @@ function MenuRouting(): JSX.Element {
                 <Route path="company/updateCoupon" element={<UpdateCoupon/>}/>
 
                 {/* Customer */}
+                <Route path="customer/customerMainPage" element={<CustomerMainPage/>}/>
                 <Route path="customer/getCustomerCoupons" element={<GetCustomerCoupons/>}/>
                 <Route path="customer/getCustomerCouponsByCategory" element={<GetCustomerCouponsByCategory/>}/>
                 <Route path="customer/getCustomerCouponsByMaxPrice" element={<GetCustomerCouponsByMoney/>}/>
