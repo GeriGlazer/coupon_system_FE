@@ -3,7 +3,7 @@ import "./customerMainPage.css";
 
 function CustomerMainPage(): JSX.Element {
 
-    const [options,setOptions] = useState([])
+    //const [options,setOptions] = useState([])
     
     return (
         <div className="customerMainPage">

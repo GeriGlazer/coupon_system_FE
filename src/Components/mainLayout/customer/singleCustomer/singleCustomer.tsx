@@ -1,20 +1,20 @@
-import { ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
+import { customer_details } from "../../../../modal/customer_details";
+
 import "./singleCustomer.css";
 
 interface SingleCustomerProps {
-	id:number;
-    name: string;
-    email: string;
+	customer: customer_details;
 }
 
 function SingleCustomer(props: SingleCustomerProps): JSX.Element {
     return (
         <div className="singleCustomer SolidBox">
-			{props.id}<hr/><br/>
-            {props.name}<br/><br/>
-            {props.email}<br/><br/>
+			<h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
+            {props.customer.name}<br/><br/>
+            {props.customer.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
-                {/*<Button onChange={} color="primary" >Coupons</Button>*/}
+                {<Button color="primary" >Coupons</Button>}
             </ButtonGroup>
         </div>
     );

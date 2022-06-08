@@ -11,12 +11,14 @@ export enum SccMsg{
 
 }
 
-export enum ErrMsg{
+
+export enum ErrMsg {
     LOGIN_ERR = "Wrong user name or password",
     COMPANY_EXISTS = "There is aldeady a company with same name or email",
     CUSTOMER_EXISTS = "There is aldeady a customer with same email",
     ID_NOT_FOUND = "The ID you requested was not found",
     CATEGORY_NOT_FOUND = "The category you requested was not found",
+    NO_LOGIN = "You must log in first",
 }
 
 class Notify{

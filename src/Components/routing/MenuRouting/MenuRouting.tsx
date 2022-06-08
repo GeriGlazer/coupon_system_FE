@@ -41,8 +41,8 @@ function MenuRouting(): JSX.Element {
                 <Route path="admin/deleteCustomer" element={<DeleteCustomer/>}/>
                 <Route path="admin/getAllCompanies" element={<GetAllCompanies/>}/>
                 <Route path="admin/getAllCustomers" element={<GetAllCustomers/>}/>
-                <Route path="admin/getCustomer" element={<GetCustomer/>}/>
-                <Route path="admin/getOneCompany" element={<GetOneCompany/>}/>
+                <Route path="admin/oneCustomer/" element={<GetCustomer/>}/>
+                <Route path="admin/oneCompany/" element={<GetOneCompany/>}/>
                 <Route path="admin/updateCompany" element={<UpdateCompany/>}/>
                 <Route path="admin/updateCustomer" element={<UpdateCustomer/>}/>
 

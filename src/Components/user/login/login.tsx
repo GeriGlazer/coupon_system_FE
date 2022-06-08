@@ -8,6 +8,8 @@ import msgNotify, { SccMsg , ErrMsg} from './../../../util/notify';
 import globals from "../../../util/globals";
 import jwtAxios from "../../../util/jwtAxios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/authState";
 
 function Login(): JSX.Element {
 
@@ -15,20 +17,27 @@ function Login(): JSX.Element {
       const [jwt, setJwt] = useState("");
       //hook useNavigate
       const navigate = useNavigate();
+      const dispatch = useDispatch();
 
       const send = (details:user_details)=>{
         jwtAxios.post(globals.urls.login, details)
         .then(response => {
             msgNotify.success(SccMsg.LOGIN_APPROVED)
+            
+            dispatch(loginUser(response.headers.authorization));
             if(details.clientType.toLowerCase()==="admin")
                 navigate("/admin/adminMainPage");
+                {/*add redux to change the menu with admin options*/}
             if(details.clientType.toLowerCase()==="company")
                 navigate("/company/companyMainPage");
+                {/*add redux to change the menu with admin options*/}
             if(details.clientType.toLowerCase()==="customer")
                 navigate("/customer/customerMainPage");
+                {/*add redux to change the menu with admin options*/}
+        
         })
         .catch(err => {
-            msgNotify.error(err.response.data.details);
+            msgNotify.error(err);
         })
       }
 

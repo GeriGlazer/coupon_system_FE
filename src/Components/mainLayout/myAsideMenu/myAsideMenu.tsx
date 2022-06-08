@@ -4,6 +4,8 @@ import "./myAsideMenu.css";
 
 
 function MyAsideMenu(): JSX.Element {
+
+    {/*useEffect or useState to change between the diferent menues */}
     const adminMenu = ()=>{
         return (
             <>
