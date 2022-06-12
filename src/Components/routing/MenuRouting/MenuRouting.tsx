@@ -28,6 +28,7 @@ import Page404 from "../../user/page404/page404";
 import "./MenuRouting.css";
 import CompanyMainPage from './../../mainLayout/company/companyMainPage/companyMainPage';
 import CustomerMainPage from "../../mainLayout/customer/customerMainPage/customerMainPage";
+import UpdatePassword from './../../mainLayout/company/updatePassword/updatePassword';
 
 function MenuRouting(): JSX.Element {
     return (
@@ -41,8 +42,8 @@ function MenuRouting(): JSX.Element {
                 <Route path="admin/deleteCustomer" element={<DeleteCustomer/>}/>
                 <Route path="admin/getAllCompanies" element={<GetAllCompanies/>}/>
                 <Route path="admin/getAllCustomers" element={<GetAllCustomers/>}/>
-                <Route path="admin/oneCustomer/" element={<GetCustomer/>}/>
-                <Route path="admin/oneCompany/" element={<GetOneCompany/>}/>
+                <Route path="admin/oneCustomer" element={<GetCustomer/>}/>
+                <Route path="admin/oneCompany" element={<GetOneCompany/>}/>
                 <Route path="admin/updateCompany" element={<UpdateCompany/>}/>
                 <Route path="admin/updateCustomer" element={<UpdateCustomer/>}/>
 

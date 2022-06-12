@@ -15,6 +15,7 @@ export enum SccMsg{
 export enum ErrMsg {
     LOGIN_ERR = "Wrong user name or password",
     COMPANY_EXISTS = "There is aldeady a company with same name or email",
+    COMPANY_MAIL_EXIST = "There is aldeady a company with same email",
     CUSTOMER_EXISTS = "There is aldeady a customer with same email",
     ID_NOT_FOUND = "The ID you requested was not found",
     CATEGORY_NOT_FOUND = "The category you requested was not found",

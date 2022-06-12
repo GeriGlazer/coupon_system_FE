@@ -13,7 +13,7 @@ function GetAllCompanyCoupons(): JSX.Element {
     const [coupons, setCoupons] = useState<Coupon_Details[]>([]);
 
     useEffect(()=>{
-        if (store.getState().userType!="COMPANY"){
+        if (store.getState().AuthState.userType!="COMPANY"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }

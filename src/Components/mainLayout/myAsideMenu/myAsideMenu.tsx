@@ -1,11 +1,15 @@
 
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { store } from "../../../redux/store";
 import "./myAsideMenu.css";
 
 
 function MyAsideMenu(): JSX.Element {
 
-    {/*useEffect or useState to change between the diferent menues */}
+    const [userMenu, setMenu] = useState<any>();
+    const navigate = useNavigate();
+
     const adminMenu = ()=>{
         return (
             <>
@@ -18,7 +22,6 @@ function MyAsideMenu(): JSX.Element {
                 <NavLink to="admin/getAllCompanies">Get all companies</NavLink><br/>
                 <NavLink to="admin/getCustomer">Get customer</NavLink><br/>
                 <NavLink to="admin/getOneCompany">Get company</NavLink><br/>
-                <NavLink to="admin/updateCompany">Company update</NavLink><br/>
                 <NavLink to="admin/updateCustomer">Customer update</NavLink><br/>     
                 <br/>
             </>
@@ -39,7 +42,7 @@ function MyAsideMenu(): JSX.Element {
                 
                 <br/>        
             </>
-        );  //this code was written in 18_05_2022, if oren still exists , please kill him :)
+        );
     };
 
     const customer = ()=>{
@@ -55,12 +58,27 @@ function MyAsideMenu(): JSX.Element {
     }
     
 
-
+    useEffect (()=>{
+        if(store.getState().AuthState.userType==="ADMIN"){
+            setMenu (adminMenu());
+        }
+        if(store.getState().AuthState.userType==="CUSTOMER"){
+            setMenu (customer());
+        }
+        if(store.getState().AuthState.userType==="COMPANY"){
+            setMenu (company());
+        }
+        else (
+            navigate("/")
+        )
+    }, [])
+    {/*create guest main page displaying all coupons in system */}
     return (
         <div className="myAsideMenu">
-			{adminMenu()}
-            {company()}
-            {customer()}      
+		{/*userMenu*/}
+        {adminMenu()}
+        {company()}
+        {customer()}
         </div>
     );
 }

@@ -13,7 +13,7 @@ function GetAllCustomers(): JSX.Element {
     const[customers, setCustomers] = useState<customer_details[]>([]);
     
     useEffect(()=>{
-        if (store.getState().userType!="ADMIN"){
+        if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }

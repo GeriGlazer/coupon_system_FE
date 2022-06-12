@@ -1,5 +1,6 @@
 class Globals{
 
+
 }
 
 class DevelopmentGlobals extends Globals{
@@ -23,6 +24,7 @@ class DevelopmentGlobals extends Globals{
         getAllCoupon: "http://localhost:8080/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/company/getCouponsByMaxPrice/",
         getCouponsByCategory: "http://localhost:8080/GYGNcoupons/company/getCouponsByCategory/",
+        updatePassword: "http://localhost:8080/GYGNcoupons/company/updatePassword",
         companyDetails: "http://localhost:8080/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "http//localhost:8080/GYGNcoupons/customer/getCustomerCoupons",
@@ -35,6 +37,7 @@ class DevelopmentGlobals extends Globals{
 
 class ProductionGlobals extends Globals{
     public urls = {
+        guest:"/GYGNcoupons/",
         login: "/GYGNcoupons/login",
         addCompany: "/GYGNcoupons/admin/addCompany",
         addCustomer: "/GYGNcoupons/admin/addCustomer",
@@ -54,6 +57,7 @@ class ProductionGlobals extends Globals{
         getAllCoupon: "/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "/GYGNcoupons/company/getCouponsByMaxPrice",
         getCouponsByCategory: "/GYGNcoupons/company/getCouponsByCategory",
+        updatePassword: "/GYGNcoupons/company/updatePassword",
         companyDetails: "/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "/GYGNcoupons/customer/getCustomerCoupons",

@@ -8,7 +8,7 @@ function GetCustomerDetails(): JSX.Element {
     const navigate = useNavigate();
     
     useEffect(()=>{
-        if (store.getState().userType!="CUSTOMER"){
+        if (store.getState().AuthState.userType!="CUSTOMER"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }

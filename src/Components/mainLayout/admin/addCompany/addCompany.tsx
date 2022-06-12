@@ -8,7 +8,7 @@ function AddCompany(): JSX.Element {
     const navigate = useNavigate();
     
     useEffect(()=>{
-        if (store.getState().userType!="ADMIN"){
+        if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }

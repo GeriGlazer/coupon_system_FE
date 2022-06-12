@@ -18,7 +18,7 @@ function GetOneCompany(): JSX.Element {
     };
     
     useEffect(()=>{
-        if (store.getState().userType!="ADMIN"){
+        if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }
@@ -37,9 +37,7 @@ function GetOneCompany(): JSX.Element {
 			<h1>Company Details</h1><hr/>
             {/*<input type="text" placeholder="Find Company by ID" onChange={searchCompany} value={company}></input>*/}
             <input type="text" placeholder="Find Company by ID" onChange={searchCompany}></input>
-            {company.map((item: company_details)=><SingleCompany key = {item.id} company={item}/>)}
-
-
+            <SingleCompany key={company.id} company={new company_details}/>            
         </div>
     );
 }
