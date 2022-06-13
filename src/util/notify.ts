@@ -20,6 +20,7 @@ export enum ErrMsg {
     ID_NOT_FOUND = "The ID you requested was not found",
     CATEGORY_NOT_FOUND = "The category you requested was not found",
     NO_LOGIN = "You must log in first",
+    LOGIN_AS_ADMIN = "You must log in as administrator",
 }
 
 class Notify{

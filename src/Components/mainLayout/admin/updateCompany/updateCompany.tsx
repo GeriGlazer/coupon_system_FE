@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Menu, TextField } from "@mui/material";
+import { Button, ButtonGroup, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -23,12 +23,12 @@ function UpdateCompany(): JSX.Element {
     
     const send = ()=>{
         if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
+            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
         }
         jwtAxios.put(globals.urls.updateCompany, company)
         .then(response=>{
-            if(response.status==300){
+            if(response.status<300){
                 msgNotify.success("Company details updated.")
             }else{
                 msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
@@ -36,6 +36,8 @@ function UpdateCompany(): JSX.Element {
         })
         .then(()=>{
             store.dispatch(updateCompanies(company)); 
+            {/*navigate not working*/}
+            navigate("admin/getAllCompanies")
         })
         .catch(err=>{
             msgNotify.error(err);
