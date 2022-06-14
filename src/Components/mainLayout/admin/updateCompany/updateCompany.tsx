@@ -67,6 +67,7 @@ function UpdateCompany(): JSX.Element {
     return (
         <div className="updateCompany SolidBox">
 			<h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
+            <h3 style={{textAlign:"center"}}>{company.id}</h3>
             <form onSubmit={handleSubmit(send)}>
                 <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
                 disabled helperText="Company Name"/>

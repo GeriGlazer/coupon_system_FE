@@ -12,6 +12,8 @@ import { loginUser } from "../../../redux/authState";
 import { store } from "../../../redux/store";
 import { downloadCompanies } from './../../../redux/companyState';
 import { company_details } from './../../../modal/company_details';
+import { customer_details } from "../../../modal/customer_details";
+import { downloadCustomers } from "../../../redux/customerState";
 
 function Login(): JSX.Element {
 
@@ -31,13 +33,13 @@ function Login(): JSX.Element {
                     jwtAxios.get<company_details[]>(globals.urls.listCompanies)
                     .then(response=>{
                         store.dispatch(downloadCompanies(response.data));
-                        {/*store.dispatch(downloadCustomers()) */}
                     })
                     .catch(err => {
                         msgNotify.error("No companies in the system");
                     })
                 }
-            {/*if(store.getState().customerState.customer.length<1){
+
+            if(store.getState().customerState.customer.length<1){
                     jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
                     .then(response=>{
                         store.dispatch(downloadCustomers(response.data))
@@ -45,9 +47,10 @@ function Login(): JSX.Element {
                     .catch(err => {
                         msgNotify.error("No customers in the system");
                     })
-            }*/}
-                navigate("/admin/adminMainPage");
             }
+            navigate("/admin/adminMainPage");
+            }
+
             if(store.getState().AuthState.userType==="COMPANY"){
                 navigate("/company/companyMainPage");
                 {/*dispatch(downloadCompanyCoupons()) */}

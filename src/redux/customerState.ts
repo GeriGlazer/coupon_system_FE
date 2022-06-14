@@ -1,7 +1,7 @@
 import { customer_details } from '../modal/customer_details';
 
 export class CustomerState{
-    customers: customer_details[] = [];
+    customer: customer_details[] = [];
 }
 
 export enum CustomerActionType{
@@ -22,7 +22,7 @@ export function addCustomer(customer:customer_details):customerAction{
 }
 
 export function deleteCustomer(coustomerId: number):customerAction{
-   return {type: CustomerActionType.deleteCustomer, payload:coustomerId} 
+return {type: CustomerActionType.deleteCustomer, payload:coustomerId} 
 }
 
 export function updateCustomer(cutomer: customer_details):customerAction{
@@ -37,26 +37,26 @@ export function RemoveAll():customerAction{
     return { type: CustomerActionType.removeAll}
 }
 
-export function CustomerRducer (currentState: CustomerState = new CustomerState, action: customerAction): CustomerState{
+export function CustomerReducer (currentState: CustomerState = new CustomerState, action: customerAction): CustomerState{
     const newState = {...currentState}
 
     switch(action.type) {
         case CustomerActionType.addCustomer:
-            newState.customers.push(action.payload);
+            newState.customer.push(action.payload);
         break;
         case CustomerActionType.updateCustomer:
-            var updateCustomer = {...newState.customers}.filter(item=>item.id!==action.payload.id);
+            var updateCustomer = {...newState.customer}.filter(item=>item.id!==action.payload.id);
             updateCustomer.push(action.payload);
-            newState.customers = updateCustomer;
+            newState.customer = updateCustomer;
         break;
         case CustomerActionType.downloadCustomers:
-            newState.customers = action.payload;
+            newState.customer = action.payload;
         break;
         case CustomerActionType.deleteCustomer:
-            newState.customers = newState.customers.filter(item=>item.id!==action.payload);
+            newState.customer = newState.customer.filter(item=>item.id!==action.payload);
         break;
         case CustomerActionType.removeAll:
-            newState.customers = [];
+            newState.customer = [];
         break;
     }
     return newState;
