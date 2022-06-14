@@ -21,7 +21,7 @@ function AddCompany(): JSX.Element {
         jwtAxios.post(globals.urls.addCompany, company)
         .then(response => {
             if(response.status<300){
-                msgNotify.success("Company added.");
+                msgNotify.success("Company added");
                 store.dispatch(removeAll());
             }else{
                 msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);

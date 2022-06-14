@@ -38,7 +38,6 @@ function Login(): JSX.Element {
                         msgNotify.error("No companies in the system");
                     })
                 }
-
             if(store.getState().customerState.customer.length<1){
                     jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
                     .then(response=>{

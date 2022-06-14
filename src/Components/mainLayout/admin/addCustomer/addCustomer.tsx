@@ -1,6 +1,6 @@
 import "./addCustomer.css";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import { useForm } from "react-hook-form";
@@ -14,14 +14,14 @@ import { downloadCustomers } from "../../../../redux/customerState";
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
-    
+  
     useEffect(()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        }
-    }, []);
-
+          if (store.getState().AuthState.userType!="ADMIN"){
+              msgNotify.error(ErrMsg.NO_LOGIN);
+              navigate("/login");
+          }
+      }, []);
+    
     const send = (customer: customer_details) => {
         jwtAxios.post(globals.urls.addCustomer, customer)
         .then(response =>{
@@ -43,9 +43,10 @@ function AddCustomer(): JSX.Element {
             msgNotify.error(err);
         })
     }
+
     return (
         <div className="addCustomer SolidBox">
-		<Typography variant="h3" className="HeadLine">Add Customer:</Typography>
+        <Typography variant="h3" className="HeadLine">Add Customer:</Typography>
         <form onSubmit={handleSubmit(send)}>
             <TextField name="firstName" label="firstName" variant="outlined" fullWidth {...register("firstName",{
                 required:{
