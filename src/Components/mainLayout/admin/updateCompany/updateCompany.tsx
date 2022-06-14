@@ -1,9 +1,9 @@
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { company_details } from "../../../../modal/company_details";
-import { updateCompanies } from "../../../../redux/companyState";
+import { deleteCompany, updateCompanies } from "../../../../redux/companyState";
 import { store } from "../../../../redux/store";
 import globals from "../../../../util/globals";
 import jwtAxios from "../../../../util/jwtAxios";
@@ -35,12 +35,30 @@ function UpdateCompany(): JSX.Element {
             }       
         })
         .then(()=>{
-            store.dispatch(updateCompanies(company)); 
-            {/*navigate not working*/}
-            navigate("admin/getAllCompanies")
+            store.dispatch(updateCompanies(company));
+            
         })
         .catch(err=>{
             msgNotify.error(err);
+        })
+        navigate("/admin/getAllCompanies");
+    }
+    const removeCompany = ()=>{
+        jwtAxios.delete(globals.urls.deleteCompany+company.id)        
+        .then(response=>{
+            if (response.status<300){
+                msgNotify.success("company "+company.name+" was deleted :)");
+                store.dispatch(deleteCompany(company.id));
+            } else {
+                msgNotify.error(ErrMsg.ID_NOT_FOUND);
+            }
+        })
+        .then(()=>{
+            navigate("/admin/getAllCompanies");
+        })
+        .catch(err=>{
+            msgNotify.error("We got a problem");
+            console.log(err);
         })
     }
     const emailChange = (args:SyntheticEvent)=>{
@@ -62,9 +80,10 @@ function UpdateCompany(): JSX.Element {
                 <ButtonGroup variant="contained" fullWidth>
                     <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
                     {/*onClick=(check if is company connected funciom else not permited) */}
-                    <Button type="submit" color="primary" >Submit</Button>
+                    <Button type="submit" color="primary" >Update</Button>
                 </ButtonGroup>
             </form>
+            <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
         </div>
     );
 }

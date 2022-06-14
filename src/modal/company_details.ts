@@ -6,5 +6,6 @@ export class company_details{
     id?:number;
     name: string;
     email: string;
+    password: string;
    
 }

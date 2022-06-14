@@ -12,12 +12,12 @@ function GetAllCompanies(): JSX.Element {
     const navigate = useNavigate();
     {/*add search bar */}
     useEffect(()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
+        if (store.getState().AuthState.userType!=="ADMIN"){
             msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
         }
             setCompanies(store.getState().companyState.company);
-            store.dispatch(updateToken(store.getState().AuthState.userToken))
+            //store.dispatch(updateToken(store.getState().AuthState.userToken))
         }, []);
     return (
         <div className="getAllCompanies">

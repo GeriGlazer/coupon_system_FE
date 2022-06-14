@@ -5,17 +5,7 @@ import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 
 function DeleteCompany(): JSX.Element {
-    const navigate = useNavigate();
     
-    useEffect(()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        }
-        /*.catch(err=>{
-            msgNotify.error(err);
-        })*/
-    }, []);
     return (
         <div className="deleteCompany">
 			<h1>מחיקת חברה</h1><hr/>

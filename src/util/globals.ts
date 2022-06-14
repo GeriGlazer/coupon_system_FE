@@ -5,11 +5,12 @@ class Globals{
 
 class DevelopmentGlobals extends Globals{
     public urls = {
+        guest:"http://localhost:8080/GYGNcoupons/guest",
         login: "http://localhost:8080/GYGNcoupons/login",
         addCompany: "http://localhost:8080/GYGNcoupons/admin/addCompany",
         addCustomer: "http://localhost:8080/GYGNcoupons/admin/addCustomer",
-        deleteCompany: "http://localhost:8080/GYGNcoupons/admin/deleteCompany",
-        deleteCustomer: "http://localhost:8080/GYGNcoupons/admin/deleteCustomer",
+        deleteCompany: "http://localhost:8080/GYGNcoupons/admin/deleteCompany/",
+        deleteCustomer: "http://localhost:8080/GYGNcoupons/admin/deleteCustomer/",
         updateCompany: "http://localhost:8080/GYGNcoupons/admin/updateCompany",
         updateCustomer: "http://localhost:8080/GYGNcoupons/admin/updateCustomer",
         listCompanies: "http://localhost:8080/GYGNcoupons/admin/allCompanies",
@@ -37,12 +38,12 @@ class DevelopmentGlobals extends Globals{
 
 class ProductionGlobals extends Globals{
     public urls = {
-        guest:"/GYGNcoupons/",
+        guest:"/GYGNcoupons/guest",
         login: "/GYGNcoupons/login",
         addCompany: "/GYGNcoupons/admin/addCompany",
         addCustomer: "/GYGNcoupons/admin/addCustomer",
-        deleteCompany: "/GYGNcoupons/admin/deleteCompany",
-        deleteCustomer: "/GYGNcoupons/admin/deleteCustomer",
+        deleteCompany: "/GYGNcoupons/admin/deleteCompany/",
+        deleteCustomer: "/GYGNcoupons/admin/deleteCustomer/",
         updateCompany: "/GYGNcoupons/admin/updateCompany",
         updateCustomer: "/GYGNcoupons/admin/updateCustomer",
         listCompanies: "/GYGNcoupons/admin/allCompanies",

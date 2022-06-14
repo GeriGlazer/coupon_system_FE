@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./getAllCompanyCoupons.css";
 import { Coupon_Details } from './../../../../modal/coupon_details';
 import { useEffect, useState } from "react";
@@ -11,20 +11,20 @@ import { store } from "../../../../redux/store";
 function GetAllCompanyCoupons(): JSX.Element {
     const navigate = useNavigate(); 
     const [coupons, setCoupons] = useState<Coupon_Details[]>([]);
+    const location = useLocation();
+    const {companyId} = location.state as any;
+    
+    useEffect (()=>{
+        //setCoupons(store.getState().companyState.company.find(item=>companyId==item.id));
+    }, [])
 
     useEffect(()=>{
-        if (store.getState().AuthState.userType!="COMPANY"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        }
         jwtAxios.get<Coupon_Details[]>(globals.urls.getAllCoupon)
         .then (response=>{
             setCoupons(response.data);
-            console.log(response.data)
         })
         .catch(err=>{
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
+            msgNotify.error("No coupons in the system");
         })
     },[])
     

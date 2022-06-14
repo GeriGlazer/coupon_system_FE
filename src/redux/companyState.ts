@@ -1,9 +1,5 @@
-import { PlaylistAddOutlined } from '@mui/icons-material';
-import globals from '../util/globals';
-import jwtAxios from '../util/jwtAxios';
-import msgNotify from '../util/notify';
-import { company_details } from './../modal/company_details';
 
+import { company_details } from './../modal/company_details';
 
 export class CompanyState{
     company: company_details[] = [];
@@ -14,6 +10,7 @@ export enum compActionType{
     deleteCompany = "deleteCompany",
     updateCompany = "updateCompany",
     addCompany = "addCompany",
+    removeAll = "removeAll",
 }
 
 export interface compAction{
@@ -26,7 +23,7 @@ export function downloadCompanies(companies: company_details[]):compAction{
     return {type: compActionType.downloadCompanies, payload:companies}
 }
 
-export function deleteCompanies(companyId:number):compAction{
+export function deleteCompany(companyId:number):compAction{
     return {type: compActionType.deleteCompany, payload:companyId}
 }
 
@@ -38,6 +35,11 @@ export function addCompany(company:company_details):compAction{
     return {type: compActionType.addCompany, payload:company}
 }
 
+export function removeAll():compAction{
+    return {type: compActionType.removeAll
+}
+}
+
 export function CompanyReducer (currentState: CompanyState = new CompanyState, action: compAction):CompanyState{
     const newState = {...currentState};
 
@@ -47,36 +49,28 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
         break;
 
         case compActionType.deleteCompany:
-            var companyId = action.payload;
-            jwtAxios.delete(globals.urls.deleteCompany + companyId)
-            .then (response=>{
-                if(response.status==200){
-                    msgNotify.success("Company deleted sucsefully")
-                    newState.company.splice(action.payload, 1)
-                }
-            }).catch(err=>{
-                msgNotify.error(err)
-            })
+            newState.company = newState.company.filter(item=>item.id!==action.payload);
         break;
 
         case compActionType.updateCompany:
-            //var updateCompany = {...newState.company}.filter(item=>item.id!=action.payload.id);
-            //updateCompany.push(action.payload);
-            //newState.company = updateCompany;
-            newState.company.push(action.payload) 
+            var updateCompany = {...newState.company}.filter(item=>item.id!==action.payload.id);
+            updateCompany.push(action.payload);
+            newState.company = updateCompany;
         break;
 
         case compActionType.addCompany:
-            jwtAxios.post(globals.urls.addCompany)
-            .then (response=>{
-                if(response.status==200){
-                    msgNotify.success("Company added sucsefully")
-                    newState.company.push(action.payload)
-                }
-            }).catch(err=>{
-                msgNotify.error(err)
-            })
+            //var addCompany = {...newState.company}.filter(item=>item.id!==action.payload)
+            //addCompany.push(action.payload)
+            //newState.company = addCompany;
+
+            newState.company.push(action.payload);
+            //newState.company = newState.company.filter(item=>item.id!==action.payload);
         break;
+
+        case compActionType.removeAll:
+            newState.company = [];
+        break;
+
     }
     return newState;
 }
