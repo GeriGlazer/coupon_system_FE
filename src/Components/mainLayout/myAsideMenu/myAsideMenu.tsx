@@ -16,13 +16,8 @@ function MyAsideMenu(): JSX.Element {
                 Administrator<br/>
                 <NavLink to="admin/addCompany">Add company</NavLink><br/>
                 <NavLink to="admin/addCustomer">Add customer</NavLink><br/>
-                <NavLink to="admin/deleteCompany">Delete company</NavLink><br/>
-                <NavLink to="admin/deleteCustomer">Delete customer</NavLink><br/>
-                <NavLink to="admin/getAllCustomers">Show all customers</NavLink><br/>
-                <NavLink to="admin/getAllCompanies">Get all companies</NavLink><br/>
-                <NavLink to="admin/getCustomer">Get customer</NavLink><br/>
-                <NavLink to="admin/getOneCompany">Get company</NavLink><br/>
-                <NavLink to="admin/updateCustomer">Customer update</NavLink><br/>     
+                <NavLink to="admin/getAllCustomers">Show customers</NavLink><br/>
+                <NavLink to="admin/getAllCompanies">Show companies</NavLink><br/>
                 <br/>
             </>
         );
