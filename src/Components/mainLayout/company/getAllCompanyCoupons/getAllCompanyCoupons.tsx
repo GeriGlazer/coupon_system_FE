@@ -10,24 +10,15 @@ import { store } from "../../../../redux/store";
 
 function GetAllCompanyCoupons(): JSX.Element {
     const navigate = useNavigate(); 
-    const [coupons, setCoupons] = useState<Coupon_Details[]>([]);
+    const [coupons, setCoupons] = useState(new Coupon_Details);
     const location = useLocation();
-    const {companyId} = location.state as any;
+    const {companyCoupons} = location.state as any;
     
     useEffect (()=>{
-        //setCoupons(store.getState().companyState.company.find(item=>companyId==item.id));
+        setCoupons(store.getState().couponState.coupon.find(item=>companyCoupons==item.id))
+        //setCoupons(store.getState().companyState.company.find(item=>companyCoupons==item.coupons))
     }, [])
 
-    useEffect(()=>{
-        jwtAxios.get<Coupon_Details[]>(globals.urls.getAllCoupon)
-        .then (response=>{
-            setCoupons(response.data);
-        })
-        .catch(err=>{
-            msgNotify.error("No coupons in the system");
-        })
-    },[])
-    
     return (
         <div className="getAllCompanyCoupons">
 			<h1>Company Coupons</h1><hr/>
