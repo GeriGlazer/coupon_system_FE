@@ -5,9 +5,9 @@ import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import { customer_details } from "../../../../modal/customer_details";
 import { useForm } from "react-hook-form";
-import { Button, ButtonGroup, TextField } from "@mui/material";
-import globals from "../../../../util/globals";
 import jwtAxios from "../../../../util/jwtAxios";
+import globals from "../../../../util/globals";
+import { Button, ButtonGroup, TextField } from "@mui/material";
 import { deleteCustomer, updateCustomer } from "../../../../redux/customerState";
 
 function UpdateCustomer(): JSX.Element {
@@ -19,14 +19,15 @@ function UpdateCustomer(): JSX.Element {
 
     
     useEffect(()=>{
+      if (store.getState().AuthState.userType!="ADMIN"){
+            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
+            navigate("/login");
+        }
         setCustomer(store.getState().customerState.customers.find(item=>customerId==item.id));
     }, [])
     
     const send = ()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
-            navigate("/login");
-        }
+        
         jwtAxios.put(globals.urls.updateCustomer, customer)
         .then(response=>{
             if(response.status<300){
@@ -49,7 +50,7 @@ function UpdateCustomer(): JSX.Element {
         jwtAxios.delete(globals.urls.deleteCustomer+customer.id)        
         .then(response=>{
             if (response.status<300){
-                msgNotify.success("company "+customer.firstName+" "+customer.lastName+" was delete");
+                msgNotify.success("Customer "+customer.firstName+" "+customer.lastName+" was delete");
                 store.dispatch(deleteCustomer(customer.id));
             } else {
                 msgNotify.error(ErrMsg.ID_NOT_FOUND);
@@ -74,7 +75,7 @@ function UpdateCustomer(): JSX.Element {
     }
     return (
         <div className="updateCustomer SolidBox">
-			<h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
+			<h1 style={{textAlign:"center"}}>Update Customer Details</h1><hr/>
             <form onSubmit={handleSubmit(send)}>
                 <TextField name="firstName" label={customer.firstName} variant="outlined" className="TextBox" fullWidth
                 {...register("firstName",{
@@ -82,7 +83,7 @@ function UpdateCustomer(): JSX.Element {
                         value:true,
                         message: 'Missing firstName'
                     }
-                })}  onChange={firstNameChange} helperText="Customer first name"/>
+                })}  onChange={firstNameChange} helperText="First name"/>
 
                 <TextField name="lastName" label={customer.lastName} variant="outlined" className="TextBox" fullWidth
                 {...register("lastName",{
@@ -90,14 +91,14 @@ function UpdateCustomer(): JSX.Element {
                         value:true,
                         message: 'Missing lastName'
                     }
-                })}  onChange={lastNameChange} helperText="Customer last name"/>
+                })}  onChange={lastNameChange} helperText="Last name"/>
 
                 <TextField name="email" label={customer.email} variant="outlined" className="TextBox" fullWidth {...register("email",{
                     required:{
                         value:true,
                         message: 'Missing Email'
                     }
-                })}  onChange={emailChange} helperText="Customer Email"/>
+                })}  onChange={emailChange} helperText="Email"/>
                 <ButtonGroup variant="contained" fullWidth>
                     <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
                     <Button type="submit" color="primary" >Update</Button>

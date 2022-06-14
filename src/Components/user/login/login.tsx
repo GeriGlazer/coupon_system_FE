@@ -38,7 +38,7 @@ function Login(): JSX.Element {
                         msgNotify.error("No companies in the system");
                     })
                 }
-            if(store.getState().customerState.customers.length<1){
+            if(store.getState().customerState.customer.length<1){
                     jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
                     .then(response=>{
                         store.dispatch(downloadCustomers(response.data))
@@ -49,6 +49,7 @@ function Login(): JSX.Element {
             }
             navigate("/admin/adminMainPage");
             }
+
             if(store.getState().AuthState.userType==="COMPANY"){
                 navigate("/company/companyMainPage");
                 {/*dispatch(downloadCompanyCoupons()) */}

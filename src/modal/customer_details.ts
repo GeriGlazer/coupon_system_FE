@@ -7,5 +7,5 @@ export class customer_details{
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
+    password: string; 
 }

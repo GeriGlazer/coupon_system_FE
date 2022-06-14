@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Coupon_Details } from "../../../modal/coupon_details";
+import { downloadCoupons } from "../../../redux/couponState";
 import { store } from "../../../redux/store";
 import globals from "../../../util/globals";
 import jwtAxios from "../../../util/jwtAxios";
@@ -15,7 +16,7 @@ function MyMainPage(): JSX.Element {
         jwtAxios.get<Coupon_Details[]>(globals.urls.guest)
         .then(response=>{
             setCoupons(response.data)
-            console.log(response.data);
+            store.dispatch(downloadCoupons(response.data));
         })
         .catch(err=>{
             msgNotify.error("No coupons in data base")

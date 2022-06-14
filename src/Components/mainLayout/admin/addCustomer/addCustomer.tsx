@@ -3,29 +3,33 @@ import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
-import { customer_details } from '../../../../modal/customer_details';
 import { useForm } from "react-hook-form";
-import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
-import jwtAxios from '../../../../util/jwtAxios';
+import { customer_details } from "../../../../modal/customer_details";
+import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
+import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
 import { removeAll } from "../../../../redux/companyState";
-import { downloadCustomers } from '../../../../redux/customerState';
+import { downloadCustomers } from "../../../../redux/customerState";
 
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
+  
+    useEffect(()=>{
+          if (store.getState().AuthState.userType!="ADMIN"){
+              msgNotify.error(ErrMsg.NO_LOGIN);
+              navigate("/login");
+          }
+      }, []);
     
     const send = (customer: customer_details) => {
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        } jwtAxios.post(globals.urls.addCustomer, customer)
+        jwtAxios.post(globals.urls.addCustomer, customer)
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("customer added");
                 store.dispatch(removeAll());
             }else{
-                msgNotify.error("customer exists");
+                msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
         })
         jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
@@ -81,10 +85,10 @@ function AddCustomer(): JSX.Element {
             <br/><br/>
             <br/>
             <ButtonGroup variant="contained" fullWidth>
-                <Button type="submit" color="primary" >add customer</Button>
+                <Button type="submit" color="primary" >Add customer</Button>
             </ButtonGroup>
         </form>
-    </div>
+        </div>
     );
 }
 

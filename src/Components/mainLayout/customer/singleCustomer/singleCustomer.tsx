@@ -16,14 +16,14 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
     const couponsList = ()=>{
         navigate("/company/getAllCustomerCoupons", {state:{customerId:props.customer.id}})
     }
+
     return (
         <div className="singleCustomer SolidBox">
-			<h2 style={{textAlign: "center"}}>{props.customer.id}</h2><hr/><br/>
-            {props.customer.firstName}<br/>
-            {props.customer.lastName}<br/><br/>
+			  <h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
+            {props.customer.firstName + " " + props.customer.lastName}<br/><br/>
             {props.customer.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
-                {<Button color="primary" onClick={couponsList}>Coupons</Button>}
+            {<Button color="primary" onClick={couponsList}>Coupons</Button>}
                 {<Button color="success" onClick={updateCustomer} >Edit Customer</Button>}
             </ButtonGroup>
         </div>
