@@ -16,8 +16,10 @@ function UpdateCustomer(): JSX.Element {
     const [customer, setCustomer] = useState(new customer_details());
     const {register, handleSubmit} = useForm<customer_details>();
     const navigate = useNavigate();
+
     
     useEffect(()=>{
+<<<<<<< HEAD
         if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
@@ -29,7 +31,17 @@ function UpdateCustomer(): JSX.Element {
         navigate("/admin/getAllCustomers");
     }
 
+=======
+      if (store.getState().AuthState.userType!="ADMIN"){
+            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
+            navigate("/login");
+        }
+        setCustomer(store.getState().customerState.customers.find(item=>customerId==item.id));
+    }, [])
+    
+>>>>>>> bc22e61de7c22decd129d7050bb8084a9bcc73f8
     const send = ()=>{
+        
         jwtAxios.put(globals.urls.updateCustomer, customer)
         .then(response=>{
             if(response.status<300){
@@ -40,13 +52,14 @@ function UpdateCustomer(): JSX.Element {
         })
         .then(()=>{
             store.dispatch(updateCustomer(customer));
+            
         })
         .catch(err=>{
             msgNotify.error(err);
         })
         navigate("/admin/getAllCustomers");
     }   
-
+    
     const removeCustomer = ()=>{
         jwtAxios.delete(globals.urls.deleteCustomer+customer.id)        
         .then(response=>{
@@ -61,7 +74,7 @@ function UpdateCustomer(): JSX.Element {
             navigate("/admin/getAllCustomers");
         })
         .catch(err=>{
-            msgNotify.error(err);
+            msgNotify.error("We got a problem");
             console.log(err);
         })
     }
@@ -74,11 +87,9 @@ function UpdateCustomer(): JSX.Element {
     const emailChange = (args:SyntheticEvent)=>{
         customer.email = (args.target as HTMLInputElement).value;
     }
-
     return (
         <div className="updateCustomer SolidBox">
 			<h1 style={{textAlign:"center"}}>Update Customer Details</h1><hr/>
-            <h3 style={{textAlign:"center"}}>{customer.id}</h3>
             <form onSubmit={handleSubmit(send)}>
                 <TextField name="firstName" label={customer.firstName} variant="outlined" className="TextBox" fullWidth
                 {...register("firstName",{

@@ -19,7 +19,7 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
 
     return (
         <div className="singleCustomer SolidBox">
-			<h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
+			  <h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
             {props.customer.firstName + " " + props.customer.lastName}<br/><br/>
             {props.customer.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
