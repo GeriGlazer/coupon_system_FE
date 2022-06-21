@@ -6,6 +6,8 @@ import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import SingleCompany from "../../company/singleCompany/singleCompany";
 import "./getAllCompanies.css";
+import GetOneCompany from './../getOneCompany/getOneCompany';
+import { Button } from "@mui/material";
 
 function GetAllCompanies(): JSX.Element {
     const[companies, setCompanies] = useState<company_details[]>([]);
@@ -19,10 +21,16 @@ function GetAllCompanies(): JSX.Element {
             setCompanies(store.getState().companyState.company);
             //store.dispatch(updateToken(store.getState().AuthState.userToken))
         }, []);
+
+        const goHome = ()=>{
+            navigate("/admin/adminMainPage");
+        }
     return (
-        <div className="getAllCompanies">
+        <div className="getAllCompanies">  
 			<h1>Companies</h1><hr/>
             {companies.map(item=><SingleCompany key = {item.id} company={item}/>)}
+            <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }

@@ -15,12 +15,12 @@ function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
     
-    useEffect(()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        }
-    }, []);
+    // useEffect(()=>{
+    //     if (store.getState().AuthState.userType!="ADMIN"){
+    //         msgNotify.error(ErrMsg.NO_LOGIN);
+    //         navigate("/login");
+    //     }
+    // }, []);
 
     const send = (customer: customer_details) => {
         jwtAxios.post(globals.urls.addCustomer, customer)
@@ -32,12 +32,13 @@ function AddCustomer(): JSX.Element {
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
         })
-        jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
-        .then((response)=>{
-            store.dispatch(downloadCustomers(response.data));
-        })
+        // jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
+        // .then((response)=>{
+        //     store.dispatch(downloadCustomers(response.data));
+        // })
         .then(()=>{
-            navigate("admin/getAllCustomers");
+            navigate("/login");
+            //navigate("admin/getAllCustomers");
         })
         .catch(err => {
             msgNotify.error(err);

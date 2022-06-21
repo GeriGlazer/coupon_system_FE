@@ -19,7 +19,12 @@ function UpdateCompany(): JSX.Element {
 
     useEffect (()=>{
         setCompany(store.getState().companyState.company.find(item=>companyId==item.id));
-    }, [])
+    }, []);
+
+    const goHome = ()=>{
+        navigate("/admin/getAllCompanies");
+    }
+
     
     const send = ()=>{
         if (store.getState().AuthState.userType!="ADMIN"){
@@ -85,6 +90,8 @@ function UpdateCompany(): JSX.Element {
                 </ButtonGroup>
             </form>
             <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+            <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }

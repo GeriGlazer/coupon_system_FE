@@ -2,18 +2,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./getAllCompanyCoupons.css";
 import { Coupon_Details } from './../../../../modal/coupon_details';
 import { useEffect, useState } from "react";
-import jwtAxios from './../../../../util/jwtAxios';
-import globals from './../../../../util/globals';
-import msgNotify, { ErrMsg } from './../../../../util/notify';
 import SingleCoupon from "../singleCoupon/singleCoupon";
 import { store } from "../../../../redux/store";
 import { company_details } from "../../../../modal/company_details";
-import { couponActionType } from "../../../../redux/couponState";
 
 function GetAllCompanyCoupons(): JSX.Element {
     const navigate = useNavigate();
-    //const location = useLocation();
-    //const {companyId} =location.state as any;
+    const location = useLocation();
     const [company, setCompany] = useState(new company_details());
     const [companyCoupons, setCompanyCoupons] = useState<Coupon_Details[]>([]);
     
@@ -21,16 +16,19 @@ function GetAllCompanyCoupons(): JSX.Element {
 
 
     useEffect (()=>{
-        if(store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error("You must be Administrator or the registrated company")
-            navigate("/login");
+        if(store.getState().AuthState.userType=="ADMIN"){
+        const {companyId} =location.state as any;
+        let singleCompany = store.getState().companyState.company.find(item=>companyId==item.id);
+        setCompany(singleCompany);
+        setCompanyCoupons(singleCompany.coupons);
         }
-        setCompany(store.getState().companyState.company.find(item=>company.id==item.id));
-        console.log(company)
-        setCompanyCoupons(company.coupons);
-        console.log("MY COUPONS: " + company.coupons)
-
+        else if(store.getState().AuthState.userType=="COMPANY"){
+            let singleCompany=store.getState().companyState.company[0];
+            setCompany(singleCompany);
+            setCompanyCoupons(singleCompany.coupons);
+        }
     }, [])
+
 
     return (
         <div className="getAllCompanyCoupons">

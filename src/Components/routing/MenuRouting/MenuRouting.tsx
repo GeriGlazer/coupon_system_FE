@@ -29,6 +29,7 @@ import "./MenuRouting.css";
 import CompanyMainPage from './../../mainLayout/company/companyMainPage/companyMainPage';
 import CustomerMainPage from "../../mainLayout/customer/customerMainPage/customerMainPage";
 import UpdatePassword from './../../mainLayout/company/updatePassword/updatePassword';
+import Register from "../../user/register/register";
 
 function MenuRouting(): JSX.Element {
     return (
@@ -68,7 +69,7 @@ function MenuRouting(): JSX.Element {
                 {/* General */}
                 <Route path="login" element={<Login/>}/>
                 <Route path="guest" element={<MyMainPage/>}/>
-
+                <Route path="register" element={<Register/>}/>
 
                 <Route path="*" element={<Page404/>}/>
             </Routes>

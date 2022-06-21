@@ -52,9 +52,14 @@ function Login(): JSX.Element {
             }
 
             if(store.getState().AuthState.userType==="COMPANY"){
+                jwtAxios.get<company_details[]>(globals.urls.companyDetails)
+                .then(response=>{
+                    console.log(response.data)
+                    store.dispatch(downloadCompanies(response.data));
+            });
                 navigate("/company/companyMainPage");
-                {/*dispatch(downloadCompanyCoupons()) */}
             }
+
             if(store.getState().AuthState.userType==="CUSTOMER"){
                 navigate("/customer/customerMainPage");
                 {/*dispatch(downloadCustomerCoupons()) */}

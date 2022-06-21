@@ -12,8 +12,6 @@
 
 .mainLayout>main{
     grid-column: span 5;
-}
-
-.mainLayout.mainLayout>*{
-    border: 1px solid gray;
+    height: 100%;
+    overflow: auto;
 }

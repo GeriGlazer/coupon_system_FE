@@ -14,7 +14,7 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
         navigate("/admin/updateCustomer/", {state:{customerId:props.customer.id}} );
     }
     const couponsList = ()=>{
-        navigate("/company/getAllCustomerCoupons", {state:{customerId:props.customer.id}})
+        navigate("/customer/getCustomerCoupons", {state:{customerId:props.customer.id}})
     }
 
     return (
@@ -23,7 +23,7 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
             {props.customer.firstName + " " + props.customer.lastName}<br/><br/>
             {props.customer.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
-            {<Button color="primary" onClick={couponsList}>Coupons</Button>}
+                {<Button color="primary" onClick={couponsList}>Coupons</Button>}
                 {<Button color="success" onClick={updateCustomer} >Edit Customer</Button>}
             </ButtonGroup>
         </div>

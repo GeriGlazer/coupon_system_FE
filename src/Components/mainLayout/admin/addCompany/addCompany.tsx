@@ -14,10 +14,10 @@ function AddCompany(): JSX.Element {
     const navigate = useNavigate();
     
     const send = (company:company_details)=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        }
+        // if (store.getState().AuthState.userType!="ADMIN"){
+        //     msgNotify.error(ErrMsg.NO_LOGIN);
+        //     navigate("/login");
+        // }
         jwtAxios.post(globals.urls.addCompany, company)
         .then(response => {
             if(response.status<300){
@@ -27,12 +27,13 @@ function AddCompany(): JSX.Element {
                 msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
             }
         }) 
-        jwtAxios.get<company_details[]>(globals.urls.listCompanies) 
-        .then((response)=>{
-            store.dispatch(downloadCompanies(response.data));
-        })
+        // jwtAxios.get<company_details[]>(globals.urls.listCompanies) 
+        // .then((response)=>{
+        //     store.dispatch(downloadCompanies(response.data));
+        // })
         .then(()=>{
-            navigate("/admin/getAllCompanies");
+            navigate("/login");
+            //navigate("/admin/getAllCompanies");
         })    
         .catch(err => {
             msgNotify.error(err);

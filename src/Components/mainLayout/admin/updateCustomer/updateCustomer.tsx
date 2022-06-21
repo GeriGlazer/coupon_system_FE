@@ -19,11 +19,15 @@ function UpdateCustomer(): JSX.Element {
     
     useEffect(()=>{
         if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.NO_LOGIN);
+            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
         }
         setCustomer(store.getState().customerState.customer.find(item=>customerId==item.id));
     }, []);
+
+    const goHome = ()=>{
+        navigate("/admin/getAllCustomers");
+    }
 
     const send = ()=>{
         jwtAxios.put(globals.urls.updateCustomer, customer)
@@ -104,6 +108,8 @@ function UpdateCustomer(): JSX.Element {
                 </ButtonGroup>
             </form>
             <Button variant="contained" color="warning" onClick={removeCustomer} fullWidth>delete</Button>
+            <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }

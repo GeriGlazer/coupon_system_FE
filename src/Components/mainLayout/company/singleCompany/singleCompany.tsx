@@ -18,8 +18,7 @@ function SingleCompany(props: SingleCompanyProps): JSX.Element {
         navigate("/admin/updateCompany/", {state:{companyId:props.company.id}} );
     }
     const couponsList = ()=>{
-        //navigate("/company/getAllCoCmpanyCoupons", {state:{companyId:props.company.id}})
-        navigate("/company/getAllCoCmpanyCoupons")
+        navigate("/company/getAllCompanyCoupons", {state:{companyId:props.company.id}})
     }
 
     return (
