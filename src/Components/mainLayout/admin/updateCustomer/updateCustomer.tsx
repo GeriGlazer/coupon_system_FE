@@ -19,7 +19,6 @@ function UpdateCustomer(): JSX.Element {
 
     
     useEffect(()=>{
-<<<<<<< HEAD
         if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
@@ -31,15 +30,6 @@ function UpdateCustomer(): JSX.Element {
         navigate("/admin/getAllCustomers");
     }
 
-=======
-      if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
-            navigate("/login");
-        }
-        setCustomer(store.getState().customerState.customers.find(item=>customerId==item.id));
-    }, [])
-    
->>>>>>> bc22e61de7c22decd129d7050bb8084a9bcc73f8
     const send = ()=>{
         
         jwtAxios.put(globals.urls.updateCustomer, customer)

@@ -24,7 +24,6 @@ function GetAllCompanyCoupons(): JSX.Element {
         }
         else if(store.getState().AuthState.userType=="COMPANY"){
             let singleCompany=store.getState().companyState.company[0];
-            setCompany(singleCompany);
             setCompanyCoupons(singleCompany.coupons);
         }
     }, [])

@@ -14,7 +14,6 @@ import { downloadCustomers } from "../../../../redux/customerState";
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
-<<<<<<< HEAD
     
     // useEffect(()=>{
     //     if (store.getState().AuthState.userType!="ADMIN"){
@@ -23,16 +22,6 @@ function AddCustomer(): JSX.Element {
     //     }
     // }, []);
 
-=======
-  
-    useEffect(()=>{
-          if (store.getState().AuthState.userType!="ADMIN"){
-              msgNotify.error(ErrMsg.NO_LOGIN);
-              navigate("/login");
-          }
-      }, []);
-    
->>>>>>> bc22e61de7c22decd129d7050bb8084a9bcc73f8
     const send = (customer: customer_details) => {
         jwtAxios.post(globals.urls.addCustomer, customer)
         .then(response =>{

@@ -11,6 +11,7 @@ export enum compActionType{
     updateCompany = "updateCompany",
     addCompany = "addCompany",
     removeAll = "removeAll",
+    downloadSingleCompany = "downloadSingleCompany",
 }
 
 export interface compAction{
@@ -21,6 +22,10 @@ export interface compAction{
 
 export function downloadCompanies(companies: company_details[]):compAction{
     return {type: compActionType.downloadCompanies, payload:companies}
+}
+
+export function downloadSingleCompany(company: company_details):compAction{
+    return {type: compActionType.downloadSingleCompany, payload:company}
 }
 
 export function deleteCompany(companyId:number):compAction{
@@ -36,8 +41,7 @@ export function addCompany(company:company_details):compAction{
 }
 
 export function removeAll():compAction{
-    return {type: compActionType.removeAll
-}
+    return {type: compActionType.removeAll}
 }
 
 export function CompanyReducer (currentState: CompanyState = new CompanyState, action: compAction):CompanyState{
@@ -65,6 +69,11 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
 
             newState.company.push(action.payload);
             //newState.company = newState.company.filter(item=>item.id!==action.payload);
+        break;
+
+        case compActionType.downloadSingleCompany:
+            newState.company = [];
+            newState.company.push(action.payload);
         break;
 
         case compActionType.removeAll:

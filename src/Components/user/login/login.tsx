@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/authState";
 import { store } from "../../../redux/store";
-import { downloadCompanies } from './../../../redux/companyState';
+import { downloadCompanies, downloadSingleCompany } from './../../../redux/companyState';
 import { company_details } from './../../../modal/company_details';
 import { customer_details } from "../../../modal/customer_details";
 import { downloadCustomers } from "../../../redux/customerState";
@@ -51,10 +51,11 @@ function Login(): JSX.Element {
             }
 
             if(store.getState().AuthState.userType==="COMPANY"){
-                jwtAxios.get<company_details[]>(globals.urls.companyDetails)
+                jwtAxios.get<company_details>(globals.urls.companyDetails)
                 .then(response=>{
                     console.log(response.data)
-                    store.dispatch(downloadCompanies(response.data));
+                    let SingleCompany = response.data;
+                    store.dispatch(downloadSingleCompany(SingleCompany));
             });
                 navigate("/company/companyMainPage");
             }
