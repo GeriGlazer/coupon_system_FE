@@ -44,6 +44,8 @@ export function AuthReducer (currentState: AuthState = new AuthState, action: Au
 
         case AuthActionType.LogoutUser:
             newState.userToken = "";
+            newState.userEmail = "";
+            newState.userType = "";
         break;
 
         case AuthActionType.UpdateToken:

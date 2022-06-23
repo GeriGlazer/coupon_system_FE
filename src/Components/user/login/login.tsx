@@ -24,24 +24,25 @@ function Login(): JSX.Element {
     setClientType(event.target.value as string);
   }
 
+  const goHome = ()=>{
+    navigate("/");
+}
+
   const send = (details: user_details) => {
-    jwtAxios
-      .post(globals.urls.login, details)
+    jwtAxios.post(globals.urls.login, details)
       .then((response) => {
         msgNotify.success(SccMsg.LOGIN_APPROVED);
         dispatch(loginUser(response.headers.authorization));
         console.log(store.getState().AuthState.userType);
         if (store.getState().AuthState.userType === "ADMIN") {
-          jwtAxios
-            .get<company_details[]>(globals.urls.listCompanies)
+          jwtAxios.get<company_details[]>(globals.urls.listCompanies)
             .then((response) => {
               store.dispatch(downloadCompanies(response.data));
             })
             .catch((err) => {
               msgNotify.error("No companies in the system");
             });
-          jwtAxios
-            .get<customer_details[]>(globals.urls.listCustomers)
+          jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
             .then((response) => {
               store.dispatch(downloadCustomers(response.data));
             })
@@ -52,15 +53,13 @@ function Login(): JSX.Element {
         }
 
         if (store.getState().AuthState.userType === "COMPANY") {
-          jwtAxios
-            .get<company_details>(globals.urls.companyDetails)
-            .then((response) => {;
+          jwtAxios.get<company_details>(globals.urls.companyDetails)
+            .then((response) => {
               let SingleCompany = response.data;
               store.dispatch(downloadSingleCompany(SingleCompany));
             });
           navigate("/company/companyMainPage");
         }
-
         if (store.getState().AuthState.userType === "CUSTOMER") {
           jwtAxios.get<customer_details>(globals.urls.customerDetails)
           .then((response)=>{
@@ -81,11 +80,7 @@ function Login(): JSX.Element {
       <form onSubmit={handleSubmit(send)}>
       <FormControl fullWidth > 
             <InputLabel id="clientType">client Type</InputLabel>
-              <Select
-                labelId="clientType"
-                value={clientType}
-                label="clientType"
-                {...register("clientType",{
+              <Select  labelId="clientType" value={clientType} label="clientType" {...register("clientType",{
                   required:{
                       value:true,
                       message: 'Missing client type'
@@ -100,16 +95,8 @@ function Login(): JSX.Element {
               </Select>
         </FormControl>
         <span>{errors.clientType?.message}</span>
-        <br />
-        <br />
-        <br />
-        <TextField
-          name="email"
-          label="email"
-          variant="outlined"
-          className="TextBox"
-          fullWidth
-          {...register("email", {
+        <br /><br /><br />
+        <TextField name="email" label="email" variant="outlined"  className="TextBox" fullWidth {...register("email", {
             required: {
               value: true,
               message: "Missing Email",
@@ -117,17 +104,8 @@ function Login(): JSX.Element {
           })}
         />
         <span>{errors.email?.message}</span>
-        <br />
-        <br />
-        <br />
-        <TextField
-          name="pass"
-          label="pass"
-          variant="outlined"
-          className="TextBox"
-          type="password"
-          fullWidth
-          {...register("pass", {
+        <br /> <br /> <br />
+        <TextField name="pass" label="pass" variant="outlined" className="TextBox" type="password" fullWidth {...register("pass", {
             required: {
               value: true,
               message: "Missing password",
@@ -135,16 +113,14 @@ function Login(): JSX.Element {
           })}
         />
         <span>{errors.pass?.message}</span>
-        <br />
-        <br />
+        <br /><br />
         <NavLink to="/register">New user? create account</NavLink>
-        <br />
-        <br />
+        <br /><br />
         <ButtonGroup variant="contained" fullWidth>
-          <Button type="submit" color="primary">
-            login
-          </Button>
+          <Button type="submit" color="primary">Login</Button>
         </ButtonGroup>
+        <br/> <br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
       </form>
     </div>
   );

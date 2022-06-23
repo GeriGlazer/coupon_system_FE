@@ -11,6 +11,10 @@ function Register(): JSX.Element {
     const addCustomer = () => {
         navigate("/admin/addCustomer");
     }
+
+    const goHome = ()=>{
+        navigate("/");
+    }
   
     return (
         <div className="register SolidBox">
@@ -19,6 +23,8 @@ function Register(): JSX.Element {
                     <Button  type="submit" color="primary" onClick={addCompany}>Company</Button>
                     <Button  type="submit" color="primary" onClick={addCustomer} >Customer</Button>
                 </ButtonGroup>
+                <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
 
     );

@@ -11,6 +11,7 @@ import msgNotify, { ErrMsg } from "../../../../util/notify";
 import "./updateCompany.css";
 
 function UpdateCompany(): JSX.Element {
+    const getUserType = store.getState().AuthState.userType;
     const location = useLocation();
     const {companyId} = location.state as any;
     const [company, setCompany] = useState(new company_details());
@@ -22,17 +23,16 @@ function UpdateCompany(): JSX.Element {
     }, []);
 
     const goHome = ()=>{
-        if(store.getState().AuthState.userType==="ADMIN"){
+        if(getUserType==="ADMIN"){
             navigate("/admin/getAllCompanies");
         }
-        if(store.getState().AuthState.userType==="COMPANY"){
+        if(getUserType==="COMPANY"){
             navigate("/company/getCompanyDetails");
         }
     }
 
-    
     const send = ()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
+        if (getUserType!="ADMIN"){
             msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
         }
@@ -74,27 +74,53 @@ function UpdateCompany(): JSX.Element {
     const emailChange = (args:SyntheticEvent)=>{
         company.email = (args.target as HTMLInputElement).value;
     }
+
+    const showButtons = ()=>{
+        if (getUserType=="ADMIN"){
+            return(
+                <>
+                    <h1 style={{textAlign:"center"}}>Delete Company</h1><hr/>
+                    <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
+                        disabled />
+                    <br/><br/>
+                    <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth 
+                        disabled />
+                    <br/><br/>
+                    <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+                </>
+            )
+        }
+        else if (getUserType == "COMPANY"){
+            return(
+                <>
+                    <h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
+                    <h3 style={{textAlign:"center"}}>{company.id}</h3>
+                    <form onSubmit={handleSubmit(send)}>
+                        <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
+                            disabled helperText="Company Name"/>
+                        <br/><br/>
+                        <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth {...register("email",{
+                            required:{
+                                value:true,
+                                message: 'Missing Email'
+                            }
+                        })}  onChange={emailChange} helperText="Company Email"/>
+                        <br/><br/>
+                        <ButtonGroup variant="contained" fullWidth>
+                            <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
+                            <Button type="submit" color="primary" >Update</Button>
+                        </ButtonGroup>
+                    </form>
+                    <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+                </>
+            )
+        }
+    }
+
+
     return (
         <div className="updateCompany SolidBox">
-			<h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
-            <h3 style={{textAlign:"center"}}>{company.id}</h3>
-            <form onSubmit={handleSubmit(send)}>
-                <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
-                disabled helperText="Company Name"/>
-
-                <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth {...register("email",{
-                    required:{
-                        value:true,
-                        message: 'Missing Email'
-                    }
-                })}  onChange={emailChange} helperText="Company Email"/>
-                <ButtonGroup variant="contained" fullWidth>
-                    <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
-                    {/*onClick=(check if is company connected funciom else not permited) */}
-                    <Button type="submit" color="primary" >Update</Button>
-                </ButtonGroup>
-            </form>
-            <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+            {showButtons()}   
             <br/><br/>
             <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
