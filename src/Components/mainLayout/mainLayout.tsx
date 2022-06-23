@@ -4,8 +4,9 @@ import MyAsideMenu from "./myAsideMenu/myAsideMenu";
 import MyFooter from "./myFooter/myFooter";
 import MyHeader from "./myHeader/myHeader";
 import MenuRouting from './../routing/MenuRouting/MenuRouting';
-import ToggleColorMode from "./toggleColorMode";
 function MainLayout(): JSX.Element {
+    
+
     
     return (
         <div className="mainLayout">
@@ -19,7 +20,6 @@ function MainLayout(): JSX.Element {
                     <MyAsideMenu/>
                 </aside>
                 <main>
-                    <ToggleColorMode/>
                     <MenuRouting/>
                 </main>
                 <footer>

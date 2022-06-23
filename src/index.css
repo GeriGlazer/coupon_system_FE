@@ -9,7 +9,9 @@ html, body, #root {
   display: inline-block;
   text-align: left;
   border: 2px solid black;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
+  max-width: 400px;
+  box-shadow: inset dimgray;
 }

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
+import Button from "@mui/material/Button";
 
 function AddCoupon(): JSX.Element {
     const navigate = useNavigate();
@@ -12,13 +13,16 @@ function AddCoupon(): JSX.Element {
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }
-        /*.catch(err=>{
-            msgNotify.error(err);
-        })*/
     }, []);
+
+    const goHome = ()=>{
+        navigate("/company/companyMainPage");
+    }
     return (
         <div className="addCoupon">
-			<h1>הוספת קופון</h1><hr/>
+			<h1>Add coupons</h1><hr/>
+            <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }

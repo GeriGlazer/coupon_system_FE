@@ -9,7 +9,8 @@ export enum CustomerActionType{
     deleteCustomer = "deleteCustomer",
     downloadCustomers = "downloadCustomers",
     updateCustomer = "updateCustomer",
-    removeAll = "removeAll"
+    removeAll = "removeAll",
+    downloadSingleCustomer = "downloadSingleCustomer",
 }
 
 export interface customerAction{
@@ -33,6 +34,10 @@ export function downloadCustomers(customers:customer_details[]):customerAction{
     return {type: CustomerActionType.downloadCustomers, payload:customers}
 }
 
+export function downloadSingleCustomer(customer:customer_details):customerAction{
+    return {type: CustomerActionType.downloadSingleCustomer, payload:customer}
+}
+
 export function RemoveAll():customerAction{
     return { type: CustomerActionType.removeAll}
 }
@@ -54,6 +59,10 @@ export function CustomerReducer (currentState: CustomerState = new CustomerState
         break;
         case CustomerActionType.deleteCustomer:
             newState.customer = newState.customer.filter(item=>item.id!==action.payload);
+        break;
+        case CustomerActionType.downloadSingleCustomer:
+            newState.customer=[];
+            newState.customer.push(action.payload);
         break;
         case CustomerActionType.removeAll:
             newState.customer = [];

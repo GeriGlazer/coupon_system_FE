@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./companyMainPage.css";
 
@@ -26,6 +25,10 @@ function CompanyMainPage(): JSX.Element {
     const couponByMaxPrice = ()=>{
         navigate("/company/getCouponsByMaxPrice")
     }
+
+    const goHome = ()=>{
+        navigate("/");
+    }
     
     return (
         <div className="companyMainPage">
@@ -35,7 +38,9 @@ function CompanyMainPage(): JSX.Element {
                 <Button onClick={compDetails}> Show me my details</Button>
                 <Button onClick={couponByCat}> Show me coupons by its category</Button>
                 <Button onClick={couponByMaxPrice}> Show me coupons by a Maximum Price</Button>
-            </ButtonGroup>	
+            </ButtonGroup>
+            <br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>	
         </div>
     );
 }

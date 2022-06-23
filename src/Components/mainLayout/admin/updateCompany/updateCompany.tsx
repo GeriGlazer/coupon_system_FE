@@ -22,7 +22,12 @@ function UpdateCompany(): JSX.Element {
     }, []);
 
     const goHome = ()=>{
-        navigate("/admin/getAllCompanies");
+        if(store.getState().AuthState.userType==="ADMIN"){
+            navigate("/admin/getAllCompanies");
+        }
+        if(store.getState().AuthState.userType==="COMPANY"){
+            navigate("/company/getCompanyDetails");
+        }
     }
 
     

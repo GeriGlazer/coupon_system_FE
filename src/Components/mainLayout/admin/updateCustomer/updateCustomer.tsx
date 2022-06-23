@@ -19,15 +19,16 @@ function UpdateCustomer(): JSX.Element {
 
     
     useEffect(()=>{
-        if (store.getState().AuthState.userType!="ADMIN"){
-            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
-            navigate("/login");
-        }
         setCustomer(store.getState().customerState.customer.find(item=>customerId==item.id));
     }, []);
 
     const goHome = ()=>{
-        navigate("/admin/getAllCustomers");
+        if(store.getState().AuthState.userType==="ADMIN"){
+            navigate("/admin/getAllCustomers");
+        }
+        if(store.getState().AuthState.userType==="CUSTOMER"){
+            navigate("/customer/customerMainPage");
+        }
     }
 
     const send = ()=>{

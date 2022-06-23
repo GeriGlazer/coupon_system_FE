@@ -15,6 +15,9 @@ function AdminMainPage(): JSX.Element {
     const getCustomers = ()=>{
         navigate("/admin/getAllCustomers")
     }
+    const goHome = ()=>{
+        navigate("/");
+    }
 
     return (
         <div className="adminMainPage">
@@ -22,6 +25,8 @@ function AdminMainPage(): JSX.Element {
                 <Button onClick={getCompanies}> Show me the companies</Button>
                 <Button onClick={getCustomers}> Show me the customers</Button>
             </ButtonGroup>
+            <br/><br/><br/><br/>
+            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }

@@ -1,3 +1,4 @@
+import { ConstructionOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { Coupon_Details } from "../../../modal/coupon_details";
 import { downloadCoupons } from "../../../redux/couponState";
@@ -16,6 +17,7 @@ function MyMainPage(): JSX.Element {
         jwtAxios.get<Coupon_Details[]>(globals.urls.guest)
         .then(response=>{
             setCoupons(response.data)
+console.log(response.data);
             store.dispatch(downloadCoupons(response.data));
         })
         .catch(err=>{
