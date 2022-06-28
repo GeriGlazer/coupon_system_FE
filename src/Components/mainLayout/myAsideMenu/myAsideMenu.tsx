@@ -20,6 +20,9 @@ const custMain = ()=>{
     navigate("/customer/customerMainPage");
 }
 
+const home = ()=>{
+    navigate("/");
+}
 
     var menu = ()=>{
         if(store.getState().AuthState.userType=="ADMIN"){
@@ -47,6 +50,8 @@ const custMain = ()=>{
     
     return (
         <div className="myAsideMenu">
+            <Button variant="contained" color="secondary" onClick={home} > Home </Button>
+            <br/><br/><br/><br/>
            {menu()}
         </div>
     );

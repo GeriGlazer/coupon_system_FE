@@ -12,23 +12,16 @@ import { Button } from "@mui/material";
 function GetAllCustomers(): JSX.Element {
     const navigate = useNavigate();
     const[customers, setCustomers] = useState<customer_details[]>([]);
-    
+    {/*add search bar */}
     useEffect(()=>{
         if (store.getState().AuthState.userType!="ADMIN"){
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }
-        jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
-        .then (response =>{
-            setCustomers(response.data)
-        })
-        .catch(err=>{
-            msgNotify.error(ErrMsg.NO_LOGIN);
-            navigate("/login");
-        })
+        setCustomers(store.getState().customerState.customer);
     },[]);
 
-    const goHome = ()=>{
+    const goBack = ()=>{
         navigate("/admin/adminMainPage");
     }
 
@@ -37,7 +30,7 @@ function GetAllCustomers(): JSX.Element {
 			<h1>Customers</h1><hr/>
             {customers.map(item=><SingleCustomer key={item.id} customer={item}/>)}
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }

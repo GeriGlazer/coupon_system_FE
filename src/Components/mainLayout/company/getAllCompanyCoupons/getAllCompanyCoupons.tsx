@@ -26,7 +26,7 @@ function GetAllCompanyCoupons(): JSX.Element {
         }
     }, [])
 
-    const goHome = ()=>{
+    const goBack = ()=>{
         if(store.getState().AuthState.userType==="ADMIN"){
             navigate("/admin/getAllCompanies");
         }
@@ -40,7 +40,7 @@ function GetAllCompanyCoupons(): JSX.Element {
 			<h1 style={{textAlign:"center"}}>Company Coupons</h1><hr/>
             {companyCoupons.map(item=><SingleCoupon key={item.id} coupon={item}/>)}
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }

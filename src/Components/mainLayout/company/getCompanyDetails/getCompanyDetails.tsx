@@ -29,7 +29,7 @@ return(
 )
     }
 
-    const goHome = ()=>{
+    const goBack = ()=>{
         navigate("/company/companyMainPage");
     }
 
@@ -38,7 +38,7 @@ return(
 			<h1>My details</h1><hr/>
             {showDetails()}
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }

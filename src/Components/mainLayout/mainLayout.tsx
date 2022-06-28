@@ -8,8 +8,8 @@ import createTheme from "@mui/material/styles/createTheme";
 import { useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { Button, CssBaseline } from "@mui/material";
+
 function MainLayout(): JSX.Element {
-    
     const [isDarkMode, setisDarkMode] = useState(false);
           
     let theme = createTheme({
@@ -22,7 +22,6 @@ function MainLayout(): JSX.Element {
     const darkMode = () => {
         setisDarkMode(!isDarkMode)
     };
-
     
     return (
         <div className="mainLayout">
@@ -36,6 +35,7 @@ function MainLayout(): JSX.Element {
                 </header>
                 <aside>
                     <MyAsideMenu/>
+                    
                 </aside>
                 <main>
                     <MenuRouting/>

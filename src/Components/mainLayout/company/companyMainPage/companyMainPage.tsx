@@ -26,9 +26,6 @@ function CompanyMainPage(): JSX.Element {
         navigate("/company/getCouponsByMaxPrice")
     }
 
-    const goHome = ()=>{
-        navigate("/");
-    }
     
     return (
         <div className="companyMainPage">
@@ -39,8 +36,6 @@ function CompanyMainPage(): JSX.Element {
                 <Button onClick={couponByCat}> Show me coupons by its category</Button>
                 <Button onClick={couponByMaxPrice}> Show me coupons by a Maximum Price</Button>
             </ButtonGroup>
-            <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>	
         </div>
     );
 }

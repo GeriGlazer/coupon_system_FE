@@ -1,6 +1,5 @@
 import "./addCustomer.css";
-import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import { useForm } from "react-hook-form";
@@ -14,13 +13,7 @@ import { downloadCustomers } from "../../../../redux/customerState";
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
-    
-    // useEffect(()=>{
-    //     if (store.getState().AuthState.userType!="ADMIN"){
-    //         msgNotify.error(ErrMsg.NO_LOGIN);
-    //         navigate("/login");
-    //     }
-    // }, []);
+    const getUserType = store.getState().AuthState.userType;
 
     const send = (customer: customer_details) => {
         jwtAxios.post(globals.urls.addCustomer, customer)
@@ -32,17 +25,22 @@ function AddCustomer(): JSX.Element {
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
         })
-        // jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
-        // .then((response)=>{
-        //     store.dispatch(downloadCustomers(response.data));
-        // })
         .then(()=>{
-            navigate("/login");
-            //navigate("admin/getAllCustomers");
+            if(getUserType=="ADMIN"){
+                navigate("/admin/getAllCustomers");
+            }
+            navigate("/customer/customerMainPage");
         })
         .catch(err => {
             msgNotify.error(err);
         })
+    }
+
+    const goBack = ()=>{
+        if(getUserType==="ADMIN"){
+            navigate("/admin/adminMainPage");
+        }
+            navigate("/");
     }
 
     return (
@@ -89,6 +87,9 @@ function AddCustomer(): JSX.Element {
                 <Button type="submit" color="primary" >Add customer</Button>
             </ButtonGroup>
         </form>
+        <ButtonGroup variant="contained" fullWidth>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
+        </ButtonGroup>
         </div>
     );
 }

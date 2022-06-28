@@ -64,7 +64,6 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
 			<h2 style={{textAlign: "center"}}>{props.coupon.title}</h2><hr/>
             {getData()}
             {getUpdateButton()}
-            
         </div>
     );
 }

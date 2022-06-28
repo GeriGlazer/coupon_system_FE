@@ -66,7 +66,7 @@ function Login(): JSX.Element {
             let SingleCustomer= response.data;
             store.dispatch(downloadSingleCustomer(SingleCustomer));
           });
-          navigate("/customer/customerMainPage");
+          navigate("/");
         }
       })
       .catch((err) => {

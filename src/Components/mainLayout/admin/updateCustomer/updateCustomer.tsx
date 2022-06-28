@@ -16,29 +16,30 @@ function UpdateCustomer(): JSX.Element {
     const [customer, setCustomer] = useState(new customer_details());
     const {register, handleSubmit} = useForm<customer_details>();
     const navigate = useNavigate();
+    const getUserType = store.getState().AuthState.userType;
 
     
     useEffect(()=>{
         setCustomer(store.getState().customerState.customer.find(item=>customerId==item.id));
     }, []);
 
-    const goHome = ()=>{
-        if(store.getState().AuthState.userType==="ADMIN"){
+    const goBack = ()=>{
+        if(getUserType==="ADMIN"){
             navigate("/admin/getAllCustomers");
         }
-        if(store.getState().AuthState.userType==="CUSTOMER"){
+        if(getUserType==="CUSTOMER"){
             navigate("/customer/customerMainPage");
         }
     }
+    
 
     const send = ()=>{
-        
         jwtAxios.put(globals.urls.updateCustomer, customer)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Customer details updated.")
             }else{
-                msgNotify.error("Cusromer's email exists");
+                msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }       
         })
         .then(()=>{
@@ -48,7 +49,7 @@ function UpdateCustomer(): JSX.Element {
         .catch(err=>{
             msgNotify.error(err);
         })
-        navigate("/admin/getAllCustomers");
+        goBack();
     }   
     
     const removeCustomer = ()=>{
@@ -58,7 +59,7 @@ function UpdateCustomer(): JSX.Element {
                 msgNotify.success("Customer "+customer.firstName+" "+customer.lastName+" was delete");
                 store.dispatch(deleteCustomer(customer.id));
             } else {
-                msgNotify.error(ErrMsg.ID_NOT_FOUND);
+                msgNotify.error(response.data);
             }
         })
         .then(()=>{
@@ -78,6 +79,28 @@ function UpdateCustomer(): JSX.Element {
     const emailChange = (args:SyntheticEvent)=>{
         customer.email = (args.target as HTMLInputElement).value;
     }
+
+    const showButtons = ()=>{
+        if (getUserType == "CUSTOMER"){
+            return(
+                <>
+                <br/><br/>
+                    <Button variant="contained" color="success" fullWidth component={Link} to={globals.urls.updatePassword}>Change Password</Button>       
+                <br/><br/>
+                </>
+            )
+        }
+        else {
+            return(
+                <>
+                <br/><br/>
+                <Button variant="contained" color="warning" onClick={removeCustomer} fullWidth>delete</Button>
+                <br/><br/>
+                </>
+            )
+        }
+    }
+
     return (
         <div className="updateCustomer SolidBox">
 			<h1 style={{textAlign:"center"}}>Update Customer Details</h1><hr/>
@@ -105,13 +128,12 @@ function UpdateCustomer(): JSX.Element {
                     }
                 })}  onChange={emailChange} helperText="Email"/>
                 <ButtonGroup variant="contained" fullWidth>
-                    <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
                     <Button type="submit" color="primary" >Update</Button>
                 </ButtonGroup>
+                {showButtons()}
             </form>
-            <Button variant="contained" color="warning" onClick={removeCustomer} fullWidth>delete</Button>
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }

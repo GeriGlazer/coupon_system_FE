@@ -44,7 +44,7 @@ function GetCouponsByMaxPrice(): JSX.Element {
         setValue(newValue as number);
       };
 
-      const goHome = () => {
+      const goBack = () => {
         navigate("/company/companyMainPage");
       };
 
@@ -69,7 +69,7 @@ function GetCouponsByMaxPrice(): JSX.Element {
       ))}
       <br />
       <br />
-      <Button variant="contained" color="error" onClick={goHome}>Back</Button>
+      <Button variant="contained" color="error" onClick={goBack}>Back</Button>
         </div>
     );
 }

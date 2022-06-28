@@ -37,14 +37,14 @@ function GetCouponByCategory(): JSX.Element {
        send(event.target.value as string);
    }
 
-   const goHome = ()=>{
+   const goBack = ()=>{
     navigate("/company/companyMainPage");
     }
 
     return (
         <div className="getCouponByCategory">
-<h1 style={{textAlign:"center"}}>Company Coupons By Category</h1><hr/>
-<FormControl fullWidth>
+            <h1 style={{textAlign:"center"}}>Company Coupons By Category</h1><hr/>
+            <FormControl fullWidth>
                 <InputLabel id="myCategory">Category</InputLabel>
                 <Select labelId="myCategory" value={category} label="Category" onChange={handleChange}>
                     <MenuItem value={"ALL"}>ALL</MenuItem>
@@ -66,7 +66,7 @@ function GetCouponByCategory(): JSX.Element {
             </FormControl> 
             {companyCoupons.map(item=><SingleCoupon key={item.id} coupon={item}/>)}
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}>Back</Button>
                </div>
     );
 }

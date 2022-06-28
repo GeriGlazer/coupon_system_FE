@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import SingleOption from "../../singleOption/singleOption";
+
 import "./adminMainPage.css";
-import jwtAxios from './../../../../util/jwtAxios';
 import { Button, ButtonGroup } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -15,8 +13,12 @@ function AdminMainPage(): JSX.Element {
     const getCustomers = ()=>{
         navigate("/admin/getAllCustomers")
     }
-    const goHome = ()=>{
-        navigate("/");
+    const addCompany = ()=>{
+        navigate("/guest/addCompany");
+    }
+
+    const addCustomer = ()=>{
+        navigate("/guest/addCustomer");
     }
 
     return (
@@ -25,8 +27,11 @@ function AdminMainPage(): JSX.Element {
                 <Button onClick={getCompanies}> Show me the companies</Button>
                 <Button onClick={getCustomers}> Show me the customers</Button>
             </ButtonGroup>
-            <br/><br/><br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <br/><br/>
+            <ButtonGroup>
+                <Button onClick={addCompany}> Add a new companies</Button>
+                <Button onClick={addCustomer}> Add a new customers</Button>
+            </ButtonGroup>
         </div>
     );
 }

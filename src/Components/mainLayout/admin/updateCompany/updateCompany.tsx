@@ -9,6 +9,7 @@ import globals from "../../../../util/globals";
 import jwtAxios from "../../../../util/jwtAxios";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import "./updateCompany.css";
+import { logOutUser } from './../../../../redux/authState';
 
 function UpdateCompany(): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
@@ -20,9 +21,11 @@ function UpdateCompany(): JSX.Element {
 
     useEffect (()=>{
         setCompany(store.getState().companyState.company.find(item=>companyId==item.id));
+        console.log(companyId);
+        console.log(company.id);
     }, []);
 
-    const goHome = ()=>{
+    const goBack = ()=>{
         if(getUserType==="ADMIN"){
             navigate("/admin/getAllCompanies");
         }
@@ -32,10 +35,6 @@ function UpdateCompany(): JSX.Element {
     }
 
     const send = ()=>{
-        if (getUserType!="ADMIN"){
-            msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
-            navigate("/login");
-        }
         jwtAxios.put(globals.urls.updateCompany, company)
         .then(response=>{
             if(response.status<300){
@@ -51,20 +50,20 @@ function UpdateCompany(): JSX.Element {
         .catch(err=>{
             msgNotify.error(err);
         })
-        navigate("/admin/getAllCompanies");
+        goBack();
     }
     const removeCompany = ()=>{
-        jwtAxios.delete(globals.urls.deleteCompany+company.id)        
+        jwtAxios.delete(globals.urls.deleteCompany+companyId)        
         .then(response=>{
             if (response.status<300){
                 msgNotify.success("company "+company.name+" was deleted :)");
                 store.dispatch(deleteCompany(company.id));
             } else {
-                msgNotify.error(ErrMsg.ID_NOT_FOUND);
+                msgNotify.error(response.data);
             }
         })
         .then(()=>{
-            navigate("/admin/getAllCompanies");
+                navigate("/admin/getAllCompanies");
         })
         .catch(err=>{
             msgNotify.error("We got a problem");
@@ -76,42 +75,21 @@ function UpdateCompany(): JSX.Element {
     }
 
     const showButtons = ()=>{
-        if (getUserType=="ADMIN"){
+        if (getUserType == "COMPANY"){
             return(
                 <>
-                    <h1 style={{textAlign:"center"}}>Delete Company</h1><hr/>
-                    <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
-                        disabled />
-                    <br/><br/>
-                    <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth 
-                        disabled />
-                    <br/><br/>
-                    <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+                <br/><br/>
+                    <Button variant="contained" color="success" fullWidth component={Link} to={globals.urls.updatePassword}>Change Password</Button>       
+                <br/><br/>
                 </>
             )
         }
-        else if (getUserType == "COMPANY"){
+        else {
             return(
                 <>
-                    <h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
-                    <h3 style={{textAlign:"center"}}>{company.id}</h3>
-                    <form onSubmit={handleSubmit(send)}>
-                        <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
-                            disabled helperText="Company Name"/>
-                        <br/><br/>
-                        <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth {...register("email",{
-                            required:{
-                                value:true,
-                                message: 'Missing Email'
-                            }
-                        })}  onChange={emailChange} helperText="Company Email"/>
-                        <br/><br/>
-                        <ButtonGroup variant="contained" fullWidth>
-                            <Button color="success" component={Link} to={globals.urls.updatePassword}>Change Password</Button>
-                            <Button type="submit" color="primary" >Update</Button>
-                        </ButtonGroup>
-                    </form>
-                    <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+                <br/><br/>
+                <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
+                <br/><br/>
                 </>
             )
         }
@@ -120,9 +98,25 @@ function UpdateCompany(): JSX.Element {
 
     return (
         <div className="updateCompany SolidBox">
-            {showButtons()}   
-            <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <h1 style={{textAlign:"center"}}>Update Company Details</h1><hr/>
+            <h3 style={{textAlign:"center"}}>{company.id}</h3>
+            <form onSubmit={handleSubmit(send)}>
+                <TextField name="name" label={company.name} variant="outlined" className="TextBox" fullWidth
+                    disabled helperText="Company Name"/>
+                <br/><br/>
+                <TextField name="email" label={company.email} variant="outlined" className="TextBox" fullWidth {...register("email",{
+                    required:{
+                        value:true,
+                        message: 'Missing Email'
+                    }
+                    })}  onChange={emailChange} helperText="Company Email"/>
+                <br/><br/>
+                <ButtonGroup variant="contained" fullWidth>
+                    <Button type="submit" color="primary" >Update</Button>
+                </ButtonGroup>
+                {showButtons()}
+            </form>
+             <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }
