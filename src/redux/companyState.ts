@@ -54,6 +54,7 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
 
         case compActionType.deleteCompany:
             newState.company = newState.company.filter(item=>item.id!==action.payload);
+
         break;
 
         case compActionType.updateCompany:

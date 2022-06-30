@@ -1,10 +1,11 @@
 import "./addCoupon.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import Button from "@mui/material/Button";
 import { Coupon_Details } from "../../../../modal/coupon_details";
+import categories from "../../../../modal/categories"
 import { useForm } from "react-hook-form";
 import jwtAxios from './../../../../util/jwtAxios';
 import globals from "../../../../util/globals";
@@ -12,10 +13,16 @@ import { removeAll } from "../../../../redux/couponState";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 function AddCoupon(): JSX.Element {
     const navigate = useNavigate();
     const {register, handleSubmit, formState:{errors}} = useForm<Coupon_Details>();
+
+    const [category, setCategory] = useState("");
+    const handleChange = (event: SelectChangeEvent)=>{
+        setCategory(event.target.value as string);
+    };
     
     const send = (coupon: Coupon_Details)=> {
         jwtAxios.put(globals.urls.addCoupon, coupon)
@@ -43,23 +50,24 @@ function AddCoupon(): JSX.Element {
 			<Typography variant="h3" className="HeadLine">Add Coupon:</Typography>
             <br/><hr/>
             <form onSubmit={handleSubmit(send)}>
-            <TextField name="title" label="title" variant="outlined" className="TextBox" fullWidth {...register("title",{
-                    required:{
-                        value:true,
-                        message: 'Missing title'
-                    }
-                })}/>
-                <span>{errors.title?.message}</span>
-                <br/><br/>
-                
-            <TextField name="category" label="category" variant="outlined" className="TextBox" fullWidth {...register("category",{
-                    required:{
-                        value:true,
-                        message: 'Missing category'
-                    }
-                })}/>
-                <span>{errors.category?.message}</span>
-                <br/><br/>
+                <TextField name="title" label="title" variant="outlined" className="TextBox" fullWidth {...register("title",{
+                        required:{
+                            value:true,
+                            message: 'Missing title'
+                        }
+                    })}/>
+                    <span>{errors.title?.message}</span>
+                    <br/><br/>
+                <FormControl  fullWidth  >
+                    <InputLabel id="myCategory">Category</InputLabel>
+                        <Select labelId="myCategory" value={category} label="Category" onChange={handleChange}>
+                            {categories.map((item,index)=>
+                            <MenuItem key={index} value={item}>{item}</MenuItem>
+                            )}
+                        </Select>
+                </FormControl>
+            
+                    <br/><br/>
                 <TextField name="description" label="description" variant="outlined" className="TextBox" fullWidth {...register("description",{
                     required:{
                         value:true,

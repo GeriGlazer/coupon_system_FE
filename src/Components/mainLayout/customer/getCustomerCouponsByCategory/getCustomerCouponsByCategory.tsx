@@ -7,10 +7,10 @@ import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, T
 import { customer_details } from "../../../../modal/customer_details";
 import { Coupon_Details } from "../../../../modal/coupon_details";
 import SingleCoupon from "../../company/singleCoupon/singleCoupon";
+import categories from "../../../../modal/categories";
 
 function GetCustomerCouponsByCategory(): JSX.Element {
     const navigate = useNavigate();
-    const [customer, setCustomer] = useState(new customer_details()); 
     let singleCustomer = store.getState().customerState.customer[0];
     const [ customerCoupons, setCustomerCoupons] = useState<Coupon_Details[]>(singleCustomer.coupons);
     const [category, setCategory] = useState('');
@@ -37,7 +37,7 @@ function GetCustomerCouponsByCategory(): JSX.Element {
         send(event.target.value as string);
     }
 
-    const goHome = ()=>{
+    const goBack = ()=>{
          navigate("/customer/customerMainPage");
     }
 
@@ -47,26 +47,14 @@ function GetCustomerCouponsByCategory(): JSX.Element {
             <FormControl fullWidth>
                 <InputLabel id="myCategory">Category</InputLabel>
                 <Select labelId="myCategory" value={category} label="Category" onChange={handleChange}>
-                    <MenuItem value={"ALL"}>ALL</MenuItem>
-                    <MenuItem value={"SPORT"}>SPORT</MenuItem>
-                    <MenuItem value={"EXTREME"}>EXTREME</MenuItem>
-                    <MenuItem value={"FOOD"}>FOOD</MenuItem>
-                    <MenuItem value={"ELECTRIC_APPLIANCE"}>ELECTRIC_APPLIANCE</MenuItem>
-                    <MenuItem value={"OUTDOOR"}>OUTDOOR</MenuItem>
-                    <MenuItem value={"PETS"}>PETS</MenuItem>
-                    <MenuItem value={"RESTAURANT"}>RESTAURANT</MenuItem>
-                    <MenuItem value={"VACATION"}>VACATION</MenuItem>
-                    <MenuItem value={"ENTERTAINMENT"}>ENTERTAINMENT</MenuItem>
-                    <MenuItem value={"CLEANING_SUPPLIES"}>CLEANING_SUPPLIES</MenuItem>
-                    <MenuItem value={"HOUSEHOLD_SUPPLIES"}>HOUSEHOLD_SUPPLIES</MenuItem>
-                    <MenuItem value={"MEDICAL_AND_ADDITIVES"}>MEDICAL_AND_ADDITIVES</MenuItem>
-                    <MenuItem value={"PERSONAL_CARE"}>PERSONAL_CARE</MenuItem>
-                    <MenuItem value={"OTHER"}>OTHER</MenuItem>
+                    {categories.map((item,index)=>
+                        <MenuItem key={index} value={item}>{item}</MenuItem>
+                    )}
                 </Select>
             </FormControl>  
             {customerCoupons.map(item=><SingleCoupon key={item.id} coupon={item}/>)}           
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>            
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>            
             </div>
     );
 }

@@ -26,12 +26,7 @@ function UpdateCompany(): JSX.Element {
     }, []);
 
     const goBack = ()=>{
-        if(getUserType==="ADMIN"){
-            navigate("/admin/getAllCompanies");
-        }
-        if(getUserType==="COMPANY"){
-            navigate("/company/getCompanyDetails");
-        }
+        navigate("/admin/getAllCompanies");
     }
 
     const send = ()=>{

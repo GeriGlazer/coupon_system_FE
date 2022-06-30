@@ -52,7 +52,7 @@ export function CouponReducer (currentState: CouponState = new CouponState, acti
         break;
 
         case couponActionType.updateCoupon:
-            const updateCoupon = {...newState.coupon}.filter(item=>item.id!==action.payload.id);
+            var updateCoupon = {...newState.coupon}.filter(item=>item.id!==action.payload.id);
             updateCoupon.push(action.payload);
             newState.coupon = updateCoupon;
         break;

@@ -27,7 +27,7 @@ function UpdateCoupon(): JSX.Element {
             navigate("/login");
         }
         const compCoup = store.getState().companyState.company[0].coupons;
-        const singleCoupon = compCoup.find(item=>couponId==item.id);
+        const singleCoupon = [...compCoup].find(item=>couponId==item.id);
         setCoupon(singleCoupon);
     }, []);
 
