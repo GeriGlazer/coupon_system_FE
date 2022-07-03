@@ -30,17 +30,14 @@ function UpdateCompany(): JSX.Element {
     }
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCompany, company)
+        jwtAxios.put(globals.urls.updateCompany,company)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Company details updated.")
+                store.dispatch(updateCompanies(company));
             }else{
-                msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
+                msgNotify.error("something gone wrong");
             }       
-        })
-        .then(()=>{
-            store.dispatch(updateCompanies(company));
-            
         })
         .catch(err=>{
             msgNotify.error(err);

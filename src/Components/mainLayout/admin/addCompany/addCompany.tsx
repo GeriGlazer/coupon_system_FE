@@ -6,12 +6,15 @@ import { company_details } from './../../../../modal/company_details';
 import { useForm } from "react-hook-form";
 import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
-import { removeAll, downloadCompanies } from "../../../../redux/companyState";
+import { removeAll, downloadCompanies, downloadSingleCompany, addCompany } from "../../../../redux/companyState";
 import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
+import { loginUser } from "../../../../redux/authState";
+import { useDispatch } from "react-redux";
 
 function AddCompany(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<company_details>();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const getUserType = store.getState().AuthState.userType;
     
     const send = (company:company_details)=>{
@@ -19,7 +22,7 @@ function AddCompany(): JSX.Element {
         .then(response => {
             if(response.status<300){
                 msgNotify.success("Company added");
-                store.dispatch(removeAll());
+                store.dispatch(addCompany(company));
             }else{
                 msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
             }
@@ -27,10 +30,22 @@ function AddCompany(): JSX.Element {
         .then(()=>{
             if(getUserType=="ADMIN"){
                 navigate("/admin/getAllCompanies");
-            }
-            navigate("/company/companyMainPage");
-            
-        })    
+            }else{
+            jwtAxios.post(globals.urls.login, company)
+            .then((response) => {
+            msgNotify.success(SccMsg.LOGIN_APPROVED);
+            dispatch(loginUser(response.headers.authorization));
+            console.log(store.getState().AuthState.userType);
+            jwtAxios.get<company_details>(globals.urls.companyDetails)
+            .then((response) => {
+              let SingleCompany = response.data;
+              store.dispatch(downloadSingleCompany(SingleCompany));
+            });
+          navigate("/company/companyMainPage");
+        })
+        }   
+        }) 
+           
         .catch(err => {
             msgNotify.error(err);
         })

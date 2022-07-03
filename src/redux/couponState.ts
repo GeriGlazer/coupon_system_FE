@@ -10,7 +10,7 @@ export enum couponActionType{
     deleteCoupon = "deleteCoupon",
     updateCoupon = "updateCoupon" ,
     addCoupon = "addCoupon" ,
-    removeAll = "removeAll" ,
+    removeAllCoupons = "removeAllCoupons" ,
 }
 
 export interface couponAction{
@@ -34,8 +34,8 @@ export function addCoupon(coupon: Coupon_Details):couponAction{
     return {type: couponActionType.addCoupon, payload:coupon}
 }
 
-export function removeAll():couponAction{
-    return {type: couponActionType.removeAll}
+export function removeAllCoupons():couponAction{
+    return {type: couponActionType.removeAllCoupons}
 }
 
 export function CouponReducer (currentState: CouponState = new CouponState, action: couponAction):CouponState{
@@ -61,7 +61,7 @@ export function CouponReducer (currentState: CouponState = new CouponState, acti
             newState.coupon.push(action.payload);
         break;
 
-        case couponActionType.removeAll:
+        case couponActionType.removeAllCoupons:
             newState.coupon = [];
         break;
     }

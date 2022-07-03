@@ -1,18 +1,21 @@
 import "./addCustomer.css";
 import { useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
-import msgNotify, { ErrMsg } from "../../../../util/notify";
+import msgNotify, { ErrMsg, SccMsg } from "../../../../util/notify";
 import { useForm } from "react-hook-form";
 import { customer_details } from "../../../../modal/customer_details";
 import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
 import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
 import { removeAll } from "../../../../redux/companyState";
-import { downloadCustomers } from "../../../../redux/customerState";
+import { addCustomer, downloadCustomers, downloadSingleCustomer } from "../../../../redux/customerState";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../../redux/authState";
 
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const getUserType = store.getState().AuthState.userType;
 
     const send = (customer: customer_details) => {
@@ -20,7 +23,7 @@ function AddCustomer(): JSX.Element {
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("customer added");
-                store.dispatch(removeAll());
+                store.dispatch(addCustomer(customer));
             }else{
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
@@ -28,8 +31,20 @@ function AddCustomer(): JSX.Element {
         .then(()=>{
             if(getUserType=="ADMIN"){
                 navigate("/admin/getAllCustomers");
-            }
-            navigate("/customer/customerMainPage");
+            }else{
+                jwtAxios.post(globals.urls.login, customer)
+                .then((response) => {
+                msgNotify.success(SccMsg.LOGIN_APPROVED);
+                dispatch(loginUser(response.headers.authorization));
+                console.log(store.getState().AuthState.userType);
+                jwtAxios.get<customer_details>(globals.urls.customerDetails)
+                .then((response) => {
+                  let SingleCustomer = response.data;
+                  store.dispatch(downloadSingleCustomer(SingleCustomer));
+                });
+              navigate("/customer/customerMainPage");
+            })
+            }   
         })
         .catch(err => {
             msgNotify.error(err);

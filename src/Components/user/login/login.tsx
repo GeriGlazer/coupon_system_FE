@@ -86,8 +86,7 @@ function Login(): JSX.Element {
                       message: 'Missing client type'
                   }
               })}
-                onChange={handleChange}
-              >
+                onChange={handleChange}>
                 <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
                 <MenuItem value={"CUSTOMER"}>CUSTOMER</MenuItem>
                 <MenuItem value={"COMPANY"}>COMPANY</MenuItem>

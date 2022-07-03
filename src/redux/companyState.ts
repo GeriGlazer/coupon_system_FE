@@ -58,7 +58,7 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
         break;
 
         case compActionType.updateCompany:
-            var updateCompany = {...newState.company}.filter(item=>item.id!==action.payload.id);
+            var updateCompany = [...newState.company].filter(item=>item.id!==action.payload.id);
             updateCompany.push(action.payload);
             newState.company = updateCompany;
         break;

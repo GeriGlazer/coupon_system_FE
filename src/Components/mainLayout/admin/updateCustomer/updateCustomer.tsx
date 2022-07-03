@@ -34,17 +34,14 @@ function UpdateCustomer(): JSX.Element {
     
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCustomer, customer)
+        jwtAxios.put(globals.urls.updateCustomer,customer)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Customer details updated.")
+                store.dispatch(updateCustomer(customer));
             }else{
-                msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
+                msgNotify.error("something gone wrong");
             }       
-        })
-        .then(()=>{
-            store.dispatch(updateCustomer(customer));
-            
         })
         .catch(err=>{
             msgNotify.error(err);
