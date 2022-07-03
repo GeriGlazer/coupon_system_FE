@@ -35,7 +35,7 @@ class DevelopmentGlobals extends Globals{
         getCustomerCouponsByCategory: "http://localhost:8080/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/customer/getCouponsByMaxPrice",
         customerDetails: "http://localhost:8080/GYGNcoupons/customer/customerDetails",
-
+        purchaseCoupon: "http://localhost:8080/GYGNcoupons/customer/purchaseCoupon/"
     }
 }
 
@@ -71,6 +71,7 @@ class ProductionGlobals extends Globals{
         getCustomerCouponsByCategory: "/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "/GYGNcoupons/customer/getCouponsByMaxPrice",
         customerDetails: "/GYGNcoupons/customer/customerDetails",
+        purchaseCoupon: "/GYGNcoupons/customer/purchaseCoupon/"
     }
 }
 //go to process, find the enviroment and from there take the node enviroment,
