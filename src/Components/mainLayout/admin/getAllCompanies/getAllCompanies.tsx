@@ -18,19 +18,18 @@ function GetAllCompanies(): JSX.Element {
             msgNotify.error(ErrMsg.LOGIN_AS_ADMIN);
             navigate("/login");
         }
-            setCompanies(store.getState().companyState.company);
-            //store.dispatch(updateToken(store.getState().AuthState.userToken))
-        }, []);
+        setCompanies(store.getState().companyState.company);
+    }, []);
 
-        const goHome = ()=>{
-            navigate("/admin/adminMainPage");
+    const goBack = ()=>{
+        navigate("/admin/adminMainPage");
         }
     return (
         <div className="getAllCompanies">  
 			<h1>Companies</h1><hr/>
             {companies.map(item=><SingleCompany key = {item.id} company={item}/>)}
             <br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
+            <Button variant="contained" color="error" onClick={goBack}> Back</Button>
         </div>
     );
 }

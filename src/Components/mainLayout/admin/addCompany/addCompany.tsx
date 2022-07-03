@@ -12,12 +12,9 @@ import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
 function AddCompany(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<company_details>();
     const navigate = useNavigate();
-    
+    const getUserType = store.getState().AuthState.userType;
+
     const send = (company:company_details)=>{
-        // if (store.getState().AuthState.userType!="ADMIN"){
-        //     msgNotify.error(ErrMsg.NO_LOGIN);
-        //     navigate("/login");
-        // }
         jwtAxios.post(globals.urls.addCompany, company)
         .then(response => {
             if(response.status<300){
@@ -27,19 +24,22 @@ function AddCompany(): JSX.Element {
                 msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
             }
         }) 
-        // jwtAxios.get<company_details[]>(globals.urls.listCompanies) 
-        // .then((response)=>{
-        //     store.dispatch(downloadCompanies(response.data));
-        // })
         .then(()=>{
-            navigate("/login");
-            //navigate("/admin/getAllCompanies");
+            if(getUserType=="ADMIN"){
+                navigate("/admin/getAllCompanies");
+            }
+            navigate("/company/companyMainPage");
         })    
         .catch(err => {
             msgNotify.error(err);
         })
     }
-
+    const goBack = ()=>{
+        if(getUserType==="ADMIN"){
+            navigate("/admin/adminMainPage");
+        }
+            navigate("/");
+    }
 
     return (
         <div className="addCompany SolidBox">
@@ -73,9 +73,12 @@ function AddCompany(): JSX.Element {
                 <br/><br/>
                 <br/>
                 <ButtonGroup variant="contained" fullWidth>
-                    <Button type="submit" color="primary" >add company</Button>
+                <Button type="submit" color="primary" >Add</Button>
                 </ButtonGroup>
             </form>
+            <ButtonGroup variant="contained" fullWidth>
+                <Button variant="contained" color="error" onClick={goBack}> Back</Button>
+            </ButtonGroup>
         </div>
     );
 }

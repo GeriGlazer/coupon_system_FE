@@ -15,8 +15,12 @@ function AdminMainPage(): JSX.Element {
     const getCustomers = ()=>{
         navigate("/admin/getAllCustomers")
     }
-    const goHome = ()=>{
-        navigate("/");
+    const addCompany = ()=>{
+        navigate("/guest/addCompany");
+    }
+
+    const addCustomer = ()=>{
+        navigate("/guest/addCustomer");
     }
 
     return (
@@ -24,9 +28,9 @@ function AdminMainPage(): JSX.Element {
 			<ButtonGroup>
                 <Button onClick={getCompanies}> Show me the companies</Button>
                 <Button onClick={getCustomers}> Show me the customers</Button>
+                <Button onClick={addCompany}> Add a new companies</Button>
+                <Button onClick={addCustomer}> Add a new customers</Button>
             </ButtonGroup>
-            <br/><br/><br/><br/>
-            <Button variant="contained" color="error" onClick={goHome}> Back</Button>
         </div>
     );
 }
