@@ -19,36 +19,15 @@ function SingleCompany(props: SingleCompanyProps): JSX.Element {
         navigate("/company/getAllCompanyCoupons", {state:{companyId:props.company.id}})
     }
 
-    const showButtons = ()=>{
-        if (getUserType == "COMPANY"){
-            return(
-                <>
-                <br/><br/>
-                <Button color="primary" onClick={couponsList}>Coupons</Button>
-                <br/><br/>
-                </>
-            )
-        }
-        else {
-            return(
-                <>
-                <br/><br/>
-                <ButtonGroup variant="contained" fullWidth>
-                    <Button color="primary" onClick={couponsList}>Coupons</Button>
-                    <Button color="secondary" onClick={updateCompany} >Edit Company</Button>
-                </ButtonGroup>
-                <br/><br/>
-                </>
-            )
-        }
-    }
-
     return (
         <div className="singleCompany SolidBox">
 			<h2 style={{textAlign:"center"}}>{props.company.id}</h2><hr/><br/>
             {props.company.name}<br/><br/>
             {props.company.email}<br/><br/>
-            {showButtons()}
+            <ButtonGroup variant="contained" fullWidth>
+                <Button color="primary" onClick={couponsList}>Coupons</Button>
+                <Button color="secondary" onClick={updateCompany} >Edit details</Button>
+            </ButtonGroup>
         </div>
     );
 }

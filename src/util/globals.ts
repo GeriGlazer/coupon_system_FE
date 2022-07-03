@@ -28,12 +28,13 @@ class DevelopmentGlobals extends Globals{
         getAllCoupon: "http://localhost:8080/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/company/getCouponsByMaxPrice",
         getCouponsByCategory: "http://localhost:8080/GYGNcoupons/company/getCouponsByCategory",
-        updatePassword: "http://localhost:8080/GYGNcoupons/company/updatePassword",
+        updateCompanydetails: "http://localhost:8080/GYGNcoupons/company/updateCompany",
         companyDetails: "http://localhost:8080/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "http//localhost:8080/GYGNcoupons/customer/getCustomerCoupons",
         getCustomerCouponsByCategory: "http://localhost:8080/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/customer/getCouponsByMaxPrice",
+        updateCustomerDetails: "http://localhost:8080/GYGNcoupons/customer/updateCustomer",
         customerDetails: "http://localhost:8080/GYGNcoupons/customer/customerDetails",
 
     }
@@ -64,12 +65,13 @@ class ProductionGlobals extends Globals{
         getAllCoupon: "/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "/GYGNcoupons/company/getCouponsByMaxPrice",
         getCouponsByCategory: "/GYGNcoupons/company/getCouponsByCategory",
-        updatePassword: "/GYGNcoupons/company/updatePassword",
+        updateCompanydetails: "/GYGNcoupons/company/updateCompany",
         companyDetails: "/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "/GYGNcoupons/customer/getCustomerCoupons",
         getCustomerCouponsByCategory: "/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "/GYGNcoupons/customer/getCouponsByMaxPrice",
+        updateCustomerDetails: "/GYGNcoupons/customer/updateCustomer",
         customerDetails: "/GYGNcoupons/customer/customerDetails",
     }
 }

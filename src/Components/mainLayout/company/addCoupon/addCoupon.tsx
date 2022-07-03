@@ -9,7 +9,7 @@ import categories from "../../../../modal/categories"
 import { useForm } from "react-hook-form";
 import jwtAxios from './../../../../util/jwtAxios';
 import globals from "../../../../util/globals";
-import { removeAll } from "../../../../redux/couponState";
+import { addCoupon, removeAll } from "../../../../redux/couponState";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -25,17 +25,17 @@ function AddCoupon(): JSX.Element {
     };
     
     const send = (coupon: Coupon_Details)=> {
-        jwtAxios.put(globals.urls.addCoupon, coupon)
+        jwtAxios.post(globals.urls.addCoupon, coupon)
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("Coupon added");
-                store.dispatch(removeAll());
+                store.dispatch(addCoupon(coupon));
+                let myCompany = store.getState().companyState.company[0];
+                myCompany.coupons.push(coupon);
+                navigate("/company/getAllCompanyCoupons");
             }else{
                 msgNotify.error("Something went wrong, lease try again.");
             }
-        })
-        .then(()=>{
-            navigate("/company/companyMainPage");
         })
         .catch(err =>{
             msgNotify.error(err);
@@ -60,7 +60,12 @@ function AddCoupon(): JSX.Element {
                     <br/><br/>
                 <FormControl  fullWidth  >
                     <InputLabel id="myCategory">Category</InputLabel>
-                        <Select labelId="myCategory" value={category} label="Category" onChange={handleChange}>
+                        <Select labelId="myCategory" value={category} label="Category" {...register("category",{
+                            required:{
+                                value:true,
+                                message:"missing category"
+                                }
+                                })} onChange={handleChange}>
                             {categories.map((item,index)=>
                             <MenuItem key={index} value={item}>{item}</MenuItem>
                             )}

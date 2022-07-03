@@ -30,7 +30,8 @@ function UpdateCompany(): JSX.Element {
     }
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCompany, company)
+        //jwtAxios.put(globals.urls.updateCompany, company)
+        jwtAxios.put(globals.urls.updateCompanydetails, company)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Company details updated.")
@@ -69,12 +70,16 @@ function UpdateCompany(): JSX.Element {
         company.email = (args.target as HTMLInputElement).value;
     }
 
+    const changePassword = ()=>{
+        navigate("/company/updatePassword");
+    }
+
     const showButtons = ()=>{
         if (getUserType == "COMPANY"){
             return(
                 <>
                 <br/><br/>
-                    <Button variant="contained" color="success" fullWidth component={Link} to={globals.urls.updatePassword}>Change Password</Button>       
+                    <Button variant="contained" color="success" fullWidth onClick={changePassword}>Change Password</Button>       
                 <br/><br/>
                 </>
             )

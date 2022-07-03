@@ -35,7 +35,7 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
             ) 
             }
         }
-        else if (getUserType == ''){
+        else if (getUserType == 'GUEST'){
             return (
                 <>
                     <Button variant="contained" onClick={goToLogin}>buy me</Button>

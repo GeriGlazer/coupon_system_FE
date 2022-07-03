@@ -19,36 +19,15 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
         navigate("/customer/getCustomerCoupons", {state:{customerId:props.customer.id}})
     }
 
-    const showButtons = ()=>{
-        if (getUserType == "CUSTOMER"){
-            return(
-                <>
-                <br/><br/>
-                <Button color="primary" onClick={couponsList}>Coupons</Button>
-                <br/><br/>
-                </>
-            )
-        }
-        else {
-            return(
-                <>
-                <br/><br/>
-                <ButtonGroup variant="contained" fullWidth>
-                    <Button color="primary" onClick={couponsList}>Coupons</Button>
-                    <Button color="secondary" onClick={updateCustomer} >Edit Customer</Button>
-                </ButtonGroup>
-                <br/><br/>
-                </>
-            )
-        }
-    }
-
     return (
         <div className="singleCustomer SolidBox">
 			  <h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
             {props.customer.firstName + " " + props.customer.lastName}<br/><br/>
             {props.customer.email}<br/><br/>
-            {showButtons()}
+            <ButtonGroup variant="contained" fullWidth>
+                <Button color="primary" onClick={couponsList}>Coupons</Button>
+                <Button color="secondary" onClick={updateCustomer} >Edit details</Button>
+            </ButtonGroup>
         </div>
     );
 }

@@ -10,6 +10,7 @@ import globals from "../../../../util/globals";
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { deleteCustomer, updateCustomer } from "../../../../redux/customerState";
 
+
 function UpdateCustomer(): JSX.Element {
     const location = useLocation();
     const {customerId} = location.state as any;
@@ -20,7 +21,11 @@ function UpdateCustomer(): JSX.Element {
 
     
     useEffect(()=>{
-        setCustomer(store.getState().customerState.customer.find(item=>customerId==item.id));
+        const singleCustomer = store.getState().customerState.customer.find(item=>customerId==item.id);
+        setCustomer(singleCustomer);
+        console.log(customerId)
+        console.log(customer)
+        console.log(singleCustomer)
     }, []);
 
     const goBack = ()=>{
@@ -34,17 +39,15 @@ function UpdateCustomer(): JSX.Element {
     
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCustomer, customer)
+        //jwtAxios.put(globals.urls.updateCustomer, customer)
+        jwtAxios.put(globals.urls.updateCustomerDetails, customer)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Customer details updated.")
+                store.dispatch(updateCustomer(customer));
             }else{
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }       
-        })
-        .then(()=>{
-            store.dispatch(updateCustomer(customer));
-            
         })
         .catch(err=>{
             msgNotify.error(err);
@@ -53,11 +56,11 @@ function UpdateCustomer(): JSX.Element {
     }   
     
     const removeCustomer = ()=>{
-        jwtAxios.delete(globals.urls.deleteCustomer+customer.id)        
+        jwtAxios.delete(globals.urls.deleteCustomer+customerId)        
         .then(response=>{
             if (response.status<300){
                 msgNotify.success("Customer "+customer.firstName+" "+customer.lastName+" was delete");
-                store.dispatch(deleteCustomer(customer.id));
+                store.dispatch(deleteCustomer(customerId));
             } else {
                 msgNotify.error(response.data);
             }
@@ -80,12 +83,16 @@ function UpdateCustomer(): JSX.Element {
         customer.email = (args.target as HTMLInputElement).value;
     }
 
+    const changePassword = ()=>{
+        navigate("/customer/updateCustomerPassword", {state:{customer: customerId}});
+    }
+
     const showButtons = ()=>{
         if (getUserType == "CUSTOMER"){
             return(
                 <>
                 <br/><br/>
-                    <Button variant="contained" color="success" fullWidth component={Link} to={globals.urls.updatePassword}>Change Password</Button>       
+                    <Button variant="contained" color="success" fullWidth onClick={changePassword}>Change Password</Button>       
                 <br/><br/>
                 </>
             )

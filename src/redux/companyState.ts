@@ -67,6 +67,7 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
             //var addCompany = {...newState.company}.filter(item=>item.id!==action.payload)
             //addCompany.push(action.payload)
             //newState.company = addCompany;
+            //const newCompany = action.payload;
 
             newState.company.push(action.payload);
             //newState.company = newState.company.filter(item=>item.id!==action.payload);

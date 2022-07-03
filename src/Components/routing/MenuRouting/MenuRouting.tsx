@@ -30,6 +30,7 @@ import CompanyMainPage from './../../mainLayout/company/companyMainPage/companyM
 import CustomerMainPage from "../../mainLayout/customer/customerMainPage/customerMainPage";
 import UpdatePassword from './../../mainLayout/company/updatePassword/updatePassword';
 import Register from "../../user/register/register";
+import UpdateCustomerPassword from "../../mainLayout/customer/updateCustomerPassword/updateCustomerPassword";
 
 function MenuRouting(): JSX.Element {
     return (
@@ -56,6 +57,7 @@ function MenuRouting(): JSX.Element {
                 <Route path="company/getCompanyDetails" element={<GetCompanyDetails/>}/>
                 <Route path="company/getCouponsByCategory" element={<GetCouponByCategory/>}/>
                 <Route path="company/getCouponsByMaxPrice" element={<GetCouponsByMaxPrice/>}/>
+                <Route path="company/updatePassword" element={<UpdatePassword/>}/>
                 <Route path="company/updateCoupon" element={<UpdateCoupon/>}/>
 
                 {/* Customer */}
@@ -63,6 +65,7 @@ function MenuRouting(): JSX.Element {
                 <Route path="customer/getCustomerCoupons" element={<GetCustomerCoupons/>}/>
                 <Route path="customer/getCustomerCouponsByCategory" element={<GetCustomerCouponsByCategory/>}/>
                 <Route path="customer/getCustomerCouponsByMaxPrice" element={<GetCustomerCouponsByMoney/>}/>
+                <Route path="customer/updateCustomerPassword" element={<UpdateCustomerPassword/>}/>
                 <Route path="customer/getCustomerDetails" element={<GetCustomerDetails/>}/>
                 <Route path="customer/purchaseCoupon" element={<PurchaseCoupon/>}/>
 
