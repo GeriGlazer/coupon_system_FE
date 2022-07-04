@@ -6,5 +6,10 @@ import { CouponReducer } from './couponState';
 import { CustomerReducer } from "./customerState";
 
 const combine = combineReducers({AuthState:AuthReducer, companyState:CompanyReducer, couponState: CouponReducer, customerState:CustomerReducer})
-export const store = configureStore({reducer: combine});
-{/*AdminReducer*/}
+export const store = configureStore({
+    reducer: combine,
+//     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+//     immutableCheck: false,
+//     serializableCheck: false,
+// })
+});

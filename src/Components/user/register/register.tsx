@@ -1,15 +1,16 @@
 import { Button, ButtonGroup, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./register.css";
+import globals from '../../../util/globals';
 
 function Register(): JSX.Element {
     const navigate = useNavigate();
 
     const addCompany = () => {
-        navigate("/admin/addCompany");
+        navigate("/guest/addCompany");
     }
     const addCustomer = () => {
-        navigate("/admin/addCustomer");
+        navigate("/guest/addCustomer");
     }
 
     const goHome = ()=>{

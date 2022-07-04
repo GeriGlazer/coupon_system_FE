@@ -2,7 +2,7 @@
 import { company_details } from './../modal/company_details';
 
 export class CompanyState{
-    company: company_details[] = [];
+    company: company_details[]=[];
 }
 
 export enum compActionType{
@@ -44,8 +44,8 @@ export function removeAll():compAction{
     return {type: compActionType.removeAll}
 }
 
-export function CompanyReducer (currentState: CompanyState = new CompanyState, action: compAction):CompanyState{
-    const newState = {...currentState};
+export function CompanyReducer (currentState: CompanyState = new CompanyState(), action: compAction):CompanyState{
+    var newState = {...currentState};
 
     switch(action.type){
         case compActionType.downloadCompanies:
@@ -58,18 +58,14 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState, a
         break;
 
         case compActionType.updateCompany:
-            var updateCompany = {...newState.company}.filter(item=>item.id!==action.payload.id);
+            var updateCompany = [...newState.company].filter(item=>item.id!==action.payload.id);
             updateCompany.push(action.payload);
             newState.company = updateCompany;
         break;
 
         case compActionType.addCompany:
-            //var addCompany = {...newState.company}.filter(item=>item.id!==action.payload)
-            //addCompany.push(action.payload)
-            //newState.company = addCompany;
-
-            newState.company.push(action.payload);
-            //newState.company = newState.company.filter(item=>item.id!==action.payload);
+            //newState.company.push(action.payload);
+          newState.company = [...newState.company,action.payload]
         break;
 
         case compActionType.downloadSingleCompany:

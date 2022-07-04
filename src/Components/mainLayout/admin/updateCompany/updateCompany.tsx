@@ -10,6 +10,7 @@ import jwtAxios from "../../../../util/jwtAxios";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import "./updateCompany.css";
 import { logOutUser } from './../../../../redux/authState';
+import { useDispatch } from 'react-redux';
 
 function UpdateCompany(): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
@@ -18,6 +19,7 @@ function UpdateCompany(): JSX.Element {
     const [company, setCompany] = useState(new company_details());
     const {register, handleSubmit} = useForm<company_details>();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect (()=>{
         setCompany(store.getState().companyState.company.find(item=>companyId==item.id));
@@ -30,17 +32,14 @@ function UpdateCompany(): JSX.Element {
     }
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCompany, company)
+        jwtAxios.put(globals.urls.updateCompany,company)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Company details updated.")
+                dispatch(updateCompanies(company));
             }else{
-                msgNotify.error(ErrMsg.COMPANY_MAIL_EXIST);
+                msgNotify.error("something gone wrong");
             }       
-        })
-        .then(()=>{
-            store.dispatch(updateCompanies(company));
-            
         })
         .catch(err=>{
             msgNotify.error(err);

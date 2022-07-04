@@ -51,7 +51,6 @@ function Login(): JSX.Element {
             });
           navigate("/admin/adminMainPage");
         }
-
         if (store.getState().AuthState.userType === "COMPANY") {
           jwtAxios.get<company_details>(globals.urls.companyDetails)
             .then((response) => {
@@ -86,8 +85,7 @@ function Login(): JSX.Element {
                       message: 'Missing client type'
                   }
               })}
-                onChange={handleChange}
-              >
+                onChange={handleChange}>
                 <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
                 <MenuItem value={"CUSTOMER"}>CUSTOMER</MenuItem>
                 <MenuItem value={"COMPANY"}>COMPANY</MenuItem>

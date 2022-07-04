@@ -37,8 +37,8 @@ function MenuRouting(): JSX.Element {
 			<Routes>
                 <Route path="/" element={<MyMainPage/>}/>
                 <Route path="admin/adminMainPage" element={<AdminMainPage/>}/>
-                <Route path="admin/addCompany" element={<AddCompany/>}/>
-                <Route path="admin/addCustomer" element={<AddCustomer/>}/>
+                <Route path="guest/addCompany" element={<AddCompany/>}/>
+                <Route path="guest/addCustomer" element={<AddCustomer/>}/>
                 <Route path="admin/deleteCompany" element={<DeleteCompany/>}/>
                 <Route path="admin/deleteCustomer" element={<DeleteCustomer/>}/>
                 <Route path="admin/getAllCompanies" element={<GetAllCompanies/>}/>
