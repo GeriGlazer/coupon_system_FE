@@ -1,3 +1,4 @@
+
 class user_details{
     clientType:string;
     email:string;

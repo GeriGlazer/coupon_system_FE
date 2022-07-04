@@ -51,7 +51,6 @@ function Login(): JSX.Element {
             });
           navigate("/admin/adminMainPage");
         }
-
         if (store.getState().AuthState.userType === "COMPANY") {
           jwtAxios.get<company_details>(globals.urls.companyDetails)
             .then((response) => {

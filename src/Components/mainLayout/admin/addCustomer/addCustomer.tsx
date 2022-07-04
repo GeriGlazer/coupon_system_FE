@@ -11,6 +11,7 @@ import { removeAll } from "../../../../redux/companyState";
 import { addCustomer, downloadCustomers, downloadSingleCustomer } from "../../../../redux/customerState";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../../redux/authState";
+import user_details from '../../../../modal/user_details';
 
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
@@ -23,25 +24,29 @@ function AddCustomer(): JSX.Element {
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("customer added");
-                store.dispatch(addCustomer(customer));
+                let fullCustomer = response.data;
+                store.dispatch(addCustomer(fullCustomer));
             }else{
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
+        })
+        .catch(err => {
+            console.log(err);
+            msgNotify.error(err);
         })
         .then(()=>{
             if(getUserType=="ADMIN"){
                 navigate("/admin/getAllCustomers");
             }else{
-                jwtAxios.post(globals.urls.login, customer)
+                let userDetails = new user_details;
+                userDetails.email = customer.email;
+                userDetails.pass = customer.password;
+                userDetails.clientType="CUSTOMER"
+                jwtAxios.post(globals.urls.login, userDetails)
                 .then((response) => {
                 msgNotify.success(SccMsg.LOGIN_APPROVED);
                 dispatch(loginUser(response.headers.authorization));
                 console.log(store.getState().AuthState.userType);
-                jwtAxios.get<customer_details>(globals.urls.customerDetails)
-                .then((response) => {
-                  let SingleCustomer = response.data;
-                  store.dispatch(downloadSingleCustomer(SingleCustomer));
-                });
               navigate("/customer/customerMainPage");
             })
             }   

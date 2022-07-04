@@ -29,9 +29,11 @@ function AddCoupon(): JSX.Element {
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("Coupon added");
-                store.dispatch(addCoupon(coupon));
+                console.log(response);
+                let fullCoupon = response.data;
+                store.dispatch(addCoupon(fullCoupon));
                 let myCompany = store.getState().companyState.company[0];
-                myCompany.coupons.push(coupon);
+                myCompany.coupons.push(fullCoupon);
                 navigate("/company/getAllCompanyCoupons");
             }else{
                 msgNotify.error("Something went wrong, lease try again.");

@@ -58,7 +58,7 @@ export function CouponReducer (currentState: CouponState = new CouponState, acti
         break;
 
         case  couponActionType.addCoupon:
-            newState.coupon.push(action.payload);
+            newState.coupon = [newState.coupon,action.payload]
         break;
 
         case couponActionType.removeAllCoupons:
