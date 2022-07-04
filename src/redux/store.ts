@@ -8,8 +8,8 @@ import { CustomerReducer } from "./customerState";
 const combine = combineReducers({AuthState:AuthReducer, companyState:CompanyReducer, couponState: CouponReducer, customerState:CustomerReducer})
 export const store = configureStore({
     reducer: combine,
-//     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-//     immutableCheck: false,
-//     serializableCheck: false,
-// })
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    immutableCheck: false,
+    serializableCheck: false,
+})
 });

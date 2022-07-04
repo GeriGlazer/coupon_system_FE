@@ -6,12 +6,7 @@ import { company_details } from "./../../../../modal/company_details";
 import { useForm } from "react-hook-form";
 import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
-import {
-  removeAll,
-  downloadCompanies,
-  downloadSingleCompany,
-  addCompany,
-} from "../../../../redux/companyState";
+import {addCompany} from "../../../../redux/companyState";
 import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
 import { loginUser } from "../../../../redux/authState";
 import { useDispatch } from "react-redux";
@@ -28,6 +23,7 @@ function AddCompany(): JSX.Element {
   const getUserType = store.getState().AuthState.userType;
 
   const send = (company: company_details) => {
+    company.coupons=[];
     jwtAxios
       .post(globals.urls.addCompany, company)
       .then((response) => {

@@ -20,6 +20,7 @@ function AddCustomer(): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
 
     const send = (customer: customer_details) => {
+        customer.coupons = [];
         jwtAxios.post(globals.urls.addCustomer, customer)
         .then(response =>{
             if(response.status<300){
