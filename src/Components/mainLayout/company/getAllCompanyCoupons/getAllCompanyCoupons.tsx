@@ -12,25 +12,26 @@ function GetAllCompanyCoupons(): JSX.Element {
     const location = useLocation();
     const [company, setCompany] = useState(new company_details());
     const [companyCoupons, setCompanyCoupons] = useState<Coupon_Details[]>([]);
+    const getUserType = store.getState().AuthState.userType;
 
     useEffect (()=>{
-        if(store.getState().AuthState.userType=="ADMIN"){
+        if(getUserType=="ADMIN"){
         const {companyId} =location.state as any;
         let singleCompany = store.getState().companyState.company.find(item=>companyId==item.id);
         setCompany(singleCompany);
         setCompanyCoupons(singleCompany.coupons);
         }
-        else if(store.getState().AuthState.userType=="COMPANY"){
+        else if(getUserType=="COMPANY"){
             let singleCompany=store.getState().companyState.company[0];
             setCompanyCoupons(singleCompany.coupons);
         }
     }, [])
 
     const goBack = ()=>{
-        if(store.getState().AuthState.userType==="ADMIN"){
+        if(getUserType==="ADMIN"){
             navigate("/admin/getAllCompanies");
         }
-        if(store.getState().AuthState.userType==="COMPANY"){
+        if(getUserType==="COMPANY"){
             navigate("/company/companyMainPage");
         }
     }

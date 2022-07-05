@@ -32,13 +32,16 @@ function CompanyMainPage(): JSX.Element {
     
     return (
         <div className="companyMainPage">
-		<ButtonGroup>
-                <Button onClick={addCoupon}> Add a coupon</Button>
-                <Button onClick={showAllCoupons}> Show me the Coupons</Button>
-                <Button onClick={compDetails}> Show me my details</Button>
-                <Button onClick={couponByCat}> Show me coupons by its category</Button>
-                <Button onClick={couponByMaxPrice}> Show me coupons by a Maximum Price</Button>
-            </ButtonGroup>
+                <Button variant="outlined" color="secondary" onClick={addCoupon}> Add a coupon</Button>
+                <span> </span>
+                <Button variant="outlined" color="secondary"  onClick={showAllCoupons}> Show me the Coupons</Button>
+                <span> </span>
+                <Button variant="outlined" color="secondary"  onClick={compDetails}> Show me my details</Button>
+                <br/><br/>
+                <Button variant="outlined" color="secondary"  onClick={couponByCat}> Show me coupons by its category</Button>
+                <span> </span>
+                <Button variant="outlined" color="secondary"  onClick={couponByMaxPrice}> Show me coupons by a Maximum Price</Button>
+                <span> </span>
         </div>
     );
 }

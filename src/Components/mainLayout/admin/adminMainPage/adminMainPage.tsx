@@ -23,15 +23,13 @@ function AdminMainPage(): JSX.Element {
 
     return (
         <div className="adminMainPage">
-			<ButtonGroup>
-                <Button onClick={getCompanies}> Show me the companies</Button>
-                <Button onClick={getCustomers}> Show me the customers</Button>
-            </ButtonGroup>
+                <Button variant="outlined" color="secondary" onClick={getCompanies}> Show me the companies</Button>
+                <span> </span>
+                <Button variant="outlined"color="secondary" onClick={getCustomers}> Show me the customers</Button>
             <br/><br/>
-            <ButtonGroup>
-                <Button onClick={addCompany}> Add a new companies</Button>
-                <Button onClick={addCustomer}> Add a new customers</Button>
-            </ButtonGroup>
+                <Button variant="outlined" color="secondary" onClick={addCompany}> Add a new companies</Button>
+                <span> </span>
+                <Button variant="outlined" color="secondary" onClick={addCustomer}> Add a new customers</Button>
         </div>
     );
 }
