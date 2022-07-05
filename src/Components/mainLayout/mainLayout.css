@@ -14,7 +14,6 @@
     grid-column: span 5;
     height: 100%;
     overflow: auto;
-    background-color: rgb(242, 247, 208);
 }
 .mainLayout>aside{
     background-color: #fbdb05;

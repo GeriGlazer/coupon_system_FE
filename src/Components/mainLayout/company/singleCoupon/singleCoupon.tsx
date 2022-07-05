@@ -39,7 +39,6 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
         let customer = store.getState().customerState.customer[0];
         customer.coupons=myCoupons;
         store.dispatch(updateCustomer(customer));
-        console.log(coupon)
         navigate("/customer/customerMainPage");
       }
     })
@@ -88,12 +87,14 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
     if(getUserType=="COMPANY"){
       return (
         <>
-          <b >ID:{props.coupon.id}</b> 
-          <b>amount:</b> {props.coupon.amount}
+          <b >ID: {props.coupon.id}</b> 
+          <br />
+          <b>Amount:</b> {props.coupon.amount}
           <br />
           <b>Category:</b> {props.coupon.category}
           <br />
-          <b>start date:</b> {props.coupon.startDate}
+          <b>Start date:</b> {props.coupon.startDate}
+          <br />
         </>
       )
     }

@@ -14,9 +14,9 @@ jwtAxios.interceptors.request.use(request=>{
     return request;
 });
 
-// jwtAxios.interceptors.response.use(response=>{
-//     store.dispatch(updateToken(response.headers.authorization));
-//     return response;
-// })
+jwtAxios.interceptors.response.use(response=>{
+    store.dispatch(updateToken(response.headers.authorization));
+    return response;
+})
 
 export default jwtAxios;
