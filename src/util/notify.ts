@@ -24,7 +24,8 @@ export enum ErrMsg {
 }
 
 class Notify{
-    private notification = new Notyf({duration:3000,position:{x:"center",y:"top"}});
+    private notification = new Notyf({duration:5000,position:{x:"center",y:"top"}});
+    
     public success(message:string){
         this.notification.success(message);
     }
@@ -35,7 +36,7 @@ class Notify{
     }
 
     private extractMsg(err:any):string{
-        if (typeof err === 'string'){
+        if (typeof err == 'string'){
             return err;
         };
         if (typeof err?.response?.data === 'string'){ //backend exact error
@@ -46,7 +47,7 @@ class Notify{
             //must return all errors
         }
         //must be last
-        if (typeof err?.message === 'string'){
+        if (typeof err?.message == 'string'){
             return err?.message;
         }
 

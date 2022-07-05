@@ -6,7 +6,6 @@ import { store } from "../../../../redux/store";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
 import SingleCompany from "../../company/singleCompany/singleCompany";
 import "./getAllCompanies.css";
-import GetOneCompany from './../getOneCompany/getOneCompany';
 import { Button } from "@mui/material";
 
 function GetAllCompanies(): JSX.Element {

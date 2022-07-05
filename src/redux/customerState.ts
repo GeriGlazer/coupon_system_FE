@@ -53,11 +53,11 @@ export function CustomerReducer (currentState: CustomerState = new CustomerState
 
     switch(action.type) {
         case CustomerActionType.addCustomer:
-            newState.customer.push(action.payload);
+            newState.customer = [...newState.customer, action.payload];
         break;
         case CustomerActionType.updateCustomer:
-            var updateCustomer = [...newState.customer].filter(item=>item.id!==action.payload.id);
-            updateCustomer.push(action.payload);
+            var updateCustomer = ([...newState.customer].filter(item=>item.id!==action.payload.id), 
+            action.payload);
             newState.customer = updateCustomer;
         break;
         case CustomerActionType.downloadCustomers:

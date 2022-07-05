@@ -18,16 +18,13 @@ import { useDispatch } from "react-redux";
 import user_details from "../../../../modal/user_details";
 
 function AddCompany(): JSX.Element {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<company_details>();
+  const {register,handleSubmit, formState:{ errors },} = useForm<company_details>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const getUserType = store.getState().AuthState.userType;
 
   const send = (company: company_details) => {
+    company.coupons=[];
     jwtAxios
       .post(globals.urls.addCompany, company)
       .then((response) => {
@@ -56,9 +53,7 @@ function AddCompany(): JSX.Element {
           });
         }
       })
-
       .catch((err) => {
-        msgNotify.error(err);
         console.log(err);
       });
   };
@@ -128,17 +123,10 @@ function AddCompany(): JSX.Element {
         <br />
         <br />
         <ButtonGroup variant="contained" fullWidth>
-          <Button type="submit" color="primary">
-            Add
-          </Button>
+          <Button type="submit" color="primary">Add</Button>
         </ButtonGroup>
       </form>
-      <ButtonGroup variant="contained" fullWidth>
-        <Button variant="contained" color="error" onClick={goBack}>
-          {" "}
-          Back
-        </Button>
-      </ButtonGroup>
+          <Button variant="contained" color="error" onClick={goBack}>Back </Button
     </div>
   );
 }

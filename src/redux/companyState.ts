@@ -58,14 +58,13 @@ export function CompanyReducer (currentState: CompanyState = new CompanyState(),
         break;
 
         case compActionType.updateCompany:
-            var updateCompany = [...newState.company].filter(item=>item.id!==action.payload.id);
-            updateCompany.push(action.payload);
+            var updateCompany =([...newState.company].filter((item) => item.id != action.payload.id),
+            action.payload);
             newState.company = updateCompany;
         break;
 
         case compActionType.addCompany:
-            //newState.company.push(action.payload);
-          newState.company = [...newState.company,action.payload]
+            newState.company = [...newState.company,action.payload];
         break;
 
         case compActionType.downloadSingleCompany:

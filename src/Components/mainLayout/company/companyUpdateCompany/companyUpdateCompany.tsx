@@ -5,14 +5,14 @@ import { Link, useLocation, useNavigate} from "react-router-dom";
 import { company_details } from "../../../../modal/company_details";
 import { deleteCompany, updateCompanies } from "../../../../redux/companyState";
 import { store } from "../../../../redux/store";
-import globals from "../../../../util/globals";
 import jwtAxios from "../../../../util/jwtAxios";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
-import "./updateCompany.css";
-import { logOutUser } from './../../../../redux/authState';
+import "./companyUpdateCompany.css";
 import { useDispatch } from 'react-redux';
+import globals from './../../../../util/globals';
 
-function UpdateCompany(): JSX.Element {
+
+function CompanyUpdateCompany(): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
     const location = useLocation();
     const {companyId} = location.state as any;
@@ -26,16 +26,16 @@ function UpdateCompany(): JSX.Element {
     }, []);
 
     const goBack = ()=>{
-        navigate("/admin/getAllCompanies");
+        navigate("/company/getCompanyDetails");
     }
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCompany,company)
+        jwtAxios.put(globals.urls.companyUpdateCompany,company)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Company details updated.")
                 dispatch(updateCompanies(company));
-            }else{
+             }else{
                 msgNotify.error("something gone wrong");
             }       
         })
@@ -44,23 +44,7 @@ function UpdateCompany(): JSX.Element {
         })
         goBack();
     }
-    const removeCompany = ()=>{
-        jwtAxios.delete(globals.urls.deleteCompany+companyId)        
-        .then(response=>{
-            if (response.status<300){
-                msgNotify.success("company "+company.name+" was deleted :)");
-                store.dispatch(deleteCompany(company.id));
-            } else {
-                msgNotify.error(response.data);
-            }
-        })
-        .then(()=>{
-                navigate("/admin/getAllCompanies");
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    }
+    
     const emailChange = (args:SyntheticEvent)=>{
         company.email = (args.target as HTMLInputElement).value;
     }
@@ -82,7 +66,6 @@ function UpdateCompany(): JSX.Element {
                 <br/><br/>
                 <ButtonGroup variant="contained" fullWidth>
                     <Button type="submit" color="primary" >Update</Button>
-                    <Button variant="contained" color="warning" onClick={removeCompany} fullWidth>delete</Button>
                 </ButtonGroup>
             </form>
              <Button variant="contained" color="error" onClick={goBack}> Back</Button>
@@ -90,4 +73,4 @@ function UpdateCompany(): JSX.Element {
     );
 }
 
-export default UpdateCompany;
+export default CompanyUpdateCompany;

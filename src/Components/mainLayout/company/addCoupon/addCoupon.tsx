@@ -40,7 +40,7 @@ function AddCoupon(): JSX.Element {
             }
         })
         .catch(err =>{
-            msgNotify.error(err);
+            console.log(err);
         })
     }
 

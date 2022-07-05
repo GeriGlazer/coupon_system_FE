@@ -23,21 +23,20 @@ class DevelopmentGlobals extends Globals{
 
         addCoupon: "http://localhost:8080/GYGNcoupons/company/addCoupon/",
         updateCoupon: "http://localhost:8080/GYGNcoupons/company/updateCoupon",
-        deleteCoupon: "http://localhost:8080/GYGNcoupons/company/deleteCoupon",
+        deleteCoupon: "http://localhost:8080/GYGNcoupons/company/delete/",
         getOneCoupon: "http://localhost:8080/GYGNcoupons/company/getOneCoupon",
         getAllCoupon: "http://localhost:8080/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/company/getCouponsByMaxPrice",
         getCouponsByCategory: "http://localhost:8080/GYGNcoupons/company/getCouponsByCategory",
-        updatePassword: "http://localhost:8080/GYGNcoupons/company/updatePassword",
+        companyUpdateCompany: "http://localhost:8080/GYGNcoupons/company/updateCompany/",
         companyDetails: "http://localhost:8080/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "http//localhost:8080/GYGNcoupons/customer/getCustomerCoupons",
         getCustomerCouponsByCategory: "http://localhost:8080/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "http://localhost:8080/GYGNcoupons/customer/getCouponsByMaxPrice",
         customerDetails: "http://localhost:8080/GYGNcoupons/customer/customerDetails",
-        purchaseCoupon: "http://localhost:8080/GYGNcoupons/customer/purchaseCoupon/"
-
-
+        purchaseCoupon: "http://localhost:8080/GYGNcoupons/customer/purchaseCoupon/",
+        customerUpdateCustomer: "http://localhost:8080/GYGNcoupons/customer/updateCustomer/",
     }
 }
 
@@ -59,19 +58,20 @@ class ProductionGlobals extends Globals{
 
         addCoupon: "/GYGNcoupons/company/addCoupon/",
         updateCoupon: "/GYGNcoupons/company/updateCoupon",
-        deleteCoupon: "/GYGNcoupons/company/deleteCoupon",
+        deleteCoupon: "/GYGNcoupons/company/delete/",
         getOneCoupon: "/GYGNcoupons/company/getOneCoupon",
         getAllCoupon: "/GYGNcoupons/company/getAllCoupons",
         getCouponsByMaxPrice: "/GYGNcoupons/company/getCouponsByMaxPrice",
         getCouponsByCategory: "/GYGNcoupons/company/getCouponsByCategory",
-        updatePassword: "/GYGNcoupons/company/updatePassword",
+        companyUpdateCompany: "/GYGNcoupons/company/updateCompany/",
         companyDetails: "/GYGNcoupons/company/companyDetails",
 
         getCustomerCoupons: "/GYGNcoupons/customer/getCustomerCoupons",
         getCustomerCouponsByCategory: "/GYGNcoupons/customer/GetCustomerCouponsByCategory",
         getCustomerCouponsByMaxPrice: "/GYGNcoupons/customer/getCouponsByMaxPrice",
         customerDetails: "/GYGNcoupons/customer/customerDetails",
-        purchaseCoupon: "/GYGNcoupons/customer/purchaseCoupon/"
+        purchaseCoupon: "/GYGNcoupons/customer/purchaseCoupon/",
+        customerUpdateCustomer: "/GYGNcoupons/customer/updateCustomer/",
 
     }
 }
