@@ -19,7 +19,7 @@ interface SingleCouponProps {
 function SingleCoupon(props: SingleCouponProps): JSX.Element {
   const getUserType = store.getState().AuthState.userType;
   const navigate = useNavigate();
-  
+
   const updateCoupon = () => {
     navigate("/company/updateCoupon", { state: { couponId: props.coupon.id } });
   };

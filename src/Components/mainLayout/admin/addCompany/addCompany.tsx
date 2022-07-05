@@ -126,7 +126,7 @@ function AddCompany(): JSX.Element {
           <Button type="submit" color="primary">Add</Button>
         </ButtonGroup>
       </form>
-          <Button variant="contained" color="error" onClick={goBack}>Back </Button>
+          <Button variant="contained" color="error" onClick={goBack}>Back </Button
     </div>
   );
 }

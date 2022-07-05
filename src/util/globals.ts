@@ -73,7 +73,6 @@ class ProductionGlobals extends Globals{
         purchaseCoupon: "/GYGNcoupons/customer/purchaseCoupon/",
         customerUpdateCustomer: "/GYGNcoupons/customer/updateCustomer/",
 
-
     }
 }
 //go to process, find the enviroment and from there take the node enviroment,
