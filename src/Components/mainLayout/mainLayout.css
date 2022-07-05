@@ -2,8 +2,8 @@
     height: 100%;
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: 10% 85% 5%;
-	grid-template-columns: repeat(6,1fr);
+    grid-template-rows: [myHeader] 80px [myMainPage] 1fr [myFooter] 50px;
+    grid-template-columns: [myAsideMenu] 150px [myMainPage] 1fr;
 }
 
 .mainLayout>header, .mainLayout>footer{
@@ -14,6 +14,7 @@
     grid-column: span 5;
     height: 100%;
     overflow: auto;
+    background-color: rgb(242, 247, 208);
 }
 .mainLayout>aside{
     background-color: #fbdb05;
