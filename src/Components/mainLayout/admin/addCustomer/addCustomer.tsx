@@ -31,6 +31,10 @@ function AddCustomer(): JSX.Element {
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
         })
+        .catch(err => {
+            console.log(err);
+            msgNotify.error(err);
+        })
         .then(()=>{
             if(getUserType=="ADMIN"){
                 navigate("/admin/getAllCustomers");
