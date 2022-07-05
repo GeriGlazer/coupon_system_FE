@@ -1,11 +1,14 @@
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { store } from "../../../../redux/store";
 import "./companyMainPage.css";
 
 function CompanyMainPage(): JSX.Element {
 
     const navigate = useNavigate();
+   
     const addCoupon = ()=>{
         navigate("/company/addCoupon")
     }

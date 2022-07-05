@@ -1,26 +1,32 @@
 import "./addCustomer.css";
 import { useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
-import msgNotify, { ErrMsg } from "../../../../util/notify";
+import msgNotify, { ErrMsg, SccMsg } from "../../../../util/notify";
 import { useForm } from "react-hook-form";
 import { customer_details } from "../../../../modal/customer_details";
 import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
 import { Button, ButtonGroup, TextField, Typography } from "@mui/material";
 import { removeAll } from "../../../../redux/companyState";
-import { downloadCustomers } from "../../../../redux/customerState";
+import { addCustomer, downloadCustomers, downloadSingleCustomer } from "../../../../redux/customerState";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../../redux/authState";
+import user_details from '../../../../modal/user_details';
 
 function AddCustomer(): JSX.Element {
     const {register, handleSubmit, formState:{errors}} = useForm<customer_details>();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const getUserType = store.getState().AuthState.userType;
 
     const send = (customer: customer_details) => {
+        customer.coupons=[];
         jwtAxios.post(globals.urls.addCustomer, customer)
         .then(response =>{
             if(response.status<300){
                 msgNotify.success("customer added");
-                store.dispatch(removeAll());
+                let fullCustomer = response.data;
+                store.dispatch(addCustomer(fullCustomer));
             }else{
                 msgNotify.error(ErrMsg.CUSTOMER_EXISTS);
             }
@@ -28,11 +34,22 @@ function AddCustomer(): JSX.Element {
         .then(()=>{
             if(getUserType=="ADMIN"){
                 navigate("/admin/getAllCustomers");
-            }
-            navigate("/customer/customerMainPage");
+            }else{
+                let userDetails = new user_details;
+                userDetails.email = customer.email;
+                userDetails.pass = customer.password;
+                userDetails.clientType="CUSTOMER"
+                jwtAxios.post(globals.urls.login, userDetails)
+                .then((response) => {
+                msgNotify.success(SccMsg.LOGIN_APPROVED);
+                dispatch(loginUser(response.headers.authorization));
+                console.log(store.getState().AuthState.userType);
+              navigate("/customer/customerMainPage");
+            })
+            }   
         })
         .catch(err => {
-            msgNotify.error(err);
+            console.log(err);
         })
     }
 

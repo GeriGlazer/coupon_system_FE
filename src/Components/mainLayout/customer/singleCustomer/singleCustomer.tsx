@@ -13,7 +13,11 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
     const navigate = useNavigate();
     const updateCustomer = ()=>{
-        navigate("/admin/updateCustomer/", {state:{customerId:props.customer.id}} );
+        if(getUserType == "ADMIN"){
+            navigate("/admin/updateCustomer/", {state:{customerId:props.customer.id}} );
+        }else{
+            navigate("/customer/customerUpdateCustomer/", {state:{customerId:props.customer.id}});     
+        }
     }
     const couponsList = ()=>{
         navigate("/customer/getCustomerCoupons", {state:{customerId:props.customer.id}})
@@ -26,7 +30,7 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
             {props.customer.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
                 <Button color="primary" onClick={couponsList}>Coupons</Button>
-                <Button color="secondary" onClick={updateCustomer} >Edit details</Button>
+                <Button color="secondary" onClick={updateCustomer} >Edit Customer</Button>
             </ButtonGroup>
         </div>
     );

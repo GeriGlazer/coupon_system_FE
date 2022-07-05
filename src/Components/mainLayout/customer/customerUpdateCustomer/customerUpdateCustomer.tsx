@@ -1,4 +1,4 @@
-import "./updateCustomer.css";
+import "./customerUpdateCustomer.css";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { store } from "../../../../redux/store";
@@ -10,7 +10,7 @@ import globals from "../../../../util/globals";
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import { deleteCustomer, updateCustomer } from "../../../../redux/customerState";
 
-function UpdateCustomer(): JSX.Element {
+function CustomerUpdateCustomer(): JSX.Element {
     const location = useLocation();
     const {customerId} = location.state as any;
     const [customer, setCustomer] = useState(new customer_details());
@@ -24,12 +24,12 @@ function UpdateCustomer(): JSX.Element {
     }, []);
 
     const goBack = ()=>{
-        navigate("/admin/getAllCustomers");
+        navigate("/customer/customerMainPage");
     }
     
 
     const send = ()=>{
-        jwtAxios.put(globals.urls.updateCustomer,customer)
+        jwtAxios.put(globals.urls.customerUpdateCustomer,customer)
         .then(response=>{
             if(response.status<300){
                 msgNotify.success("Customer details updated.")
@@ -43,22 +43,6 @@ function UpdateCustomer(): JSX.Element {
         })
         goBack();
     }   
-    
-    const removeCustomer = ()=>{
-        jwtAxios.delete(globals.urls.deleteCustomer+customer.id)        
-        .then(response=>{
-            if (response.status<300){
-                msgNotify.success("Customer "+customer.firstName+" "+customer.lastName+" was delete");
-                store.dispatch(deleteCustomer(customer.id));
-            } else {
-                msgNotify.error(response.data);
-            }
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-        goBack();
-    }
     
     const firstNameChange = (args:SyntheticEvent)=>{
         customer.firstName = (args.target as HTMLInputElement).value;
@@ -98,7 +82,6 @@ function UpdateCustomer(): JSX.Element {
                 })}  onChange={emailChange} helperText="Email"/>
                 <ButtonGroup variant="contained" fullWidth>
                     <Button type="submit" color="primary" >Update</Button>
-                    <Button variant="contained" color="warning" onClick={removeCustomer} fullWidth>delete</Button>
                 </ButtonGroup>
             </form>
             <br/><br/>
@@ -107,4 +90,4 @@ function UpdateCustomer(): JSX.Element {
     );
 }
 
-export default UpdateCustomer;
+export default CustomerUpdateCustomer;

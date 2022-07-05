@@ -13,7 +13,11 @@ function SingleCompany(props: SingleCompanyProps): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
     const navigate = useNavigate();
     const updateCompany = ()=>{
+        if(getUserType == "ADMIN"){
         navigate("/admin/updateCompany/", {state:{companyId:props.company.id}} );
+        }else{
+            navigate("/company/companyUpdateCompany/", {state:{companyId:props.company.id}});
+        }
     }
     const couponsList = ()=>{
         navigate("/company/getAllCompanyCoupons", {state:{companyId:props.company.id}})
@@ -26,7 +30,7 @@ function SingleCompany(props: SingleCompanyProps): JSX.Element {
             {props.company.email}<br/><br/>
             <ButtonGroup variant="contained" fullWidth>
                 <Button color="primary" onClick={couponsList}>Coupons</Button>
-                <Button color="secondary" onClick={updateCompany} >Edit details</Button>
+                <Button color="secondary" onClick={updateCompany} >Edit Company</Button>
             </ButtonGroup>
         </div>
     );

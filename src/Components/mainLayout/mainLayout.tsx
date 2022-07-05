@@ -8,7 +8,6 @@ import createTheme from "@mui/material/styles/createTheme";
 import { useState } from "react";
 import { ThemeProvider } from "@emotion/react";
 import { Button, CssBaseline } from "@mui/material";
-import { store } from "../../redux/store";
 
 function MainLayout(): JSX.Element {
     const [isDarkMode, setisDarkMode] = useState(false);

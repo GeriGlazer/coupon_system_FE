@@ -6,8 +6,6 @@ import SingleCoupon from "../singleCoupon/singleCoupon";
 import { store } from "../../../../redux/store";
 import { company_details } from "../../../../modal/company_details";
 import Button from "@mui/material/Button";
-import { IconButton, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 
 function GetAllCompanyCoupons(): JSX.Element {
     const navigate = useNavigate();

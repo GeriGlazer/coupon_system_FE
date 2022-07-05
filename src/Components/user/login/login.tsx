@@ -29,11 +29,13 @@ function Login(): JSX.Element {
 }
 
   const send = (details: user_details) => {
+    // who tuched the login??
     jwtAxios.post(globals.urls.login, details)
       .then((response) => {
         msgNotify.success(SccMsg.LOGIN_APPROVED);
         dispatch(loginUser(response.headers.authorization));
         console.log(store.getState().AuthState.userType);
+        console.log(store.getState().AuthState.userEmail);
         if (store.getState().AuthState.userType === "ADMIN") {
           jwtAxios.get<company_details[]>(globals.urls.listCompanies)
             .then((response) => {
@@ -51,12 +53,15 @@ function Login(): JSX.Element {
             });
           navigate("/admin/adminMainPage");
         }
-
         if (store.getState().AuthState.userType === "COMPANY") {
           jwtAxios.get<company_details>(globals.urls.companyDetails)
             .then((response) => {
               let SingleCompany = response.data;
               store.dispatch(downloadSingleCompany(SingleCompany));
+            })
+            .catch((err) => {
+              msgNotify.error(err);
+              console.log(response.data);
             });
           navigate("/company/companyMainPage");
         }
@@ -65,18 +70,24 @@ function Login(): JSX.Element {
           .then((response)=>{
             let SingleCustomer= response.data;
             store.dispatch(downloadSingleCustomer(SingleCustomer));
+          })
+          .catch((err) => {
+            msgNotify.error(err);
+            console.log(response.data);
           });
           navigate("/");
         }
       })
       .catch((err) => {
         msgNotify.error(err);
+        console.log(err);
       });
   };
 
   return (
     <div className="login SolidBox">
-      <Typography variant="h3" className="HeadLine">Login  </Typography>
+      <Typography variant="h3" className="HeadLine">Login</Typography>
+      <br /><br />
       <form onSubmit={handleSubmit(send)}>
       <FormControl fullWidth > 
             <InputLabel id="clientType">client Type</InputLabel>
@@ -86,8 +97,7 @@ function Login(): JSX.Element {
                       message: 'Missing client type'
                   }
               })}
-                onChange={handleChange}
-              >
+                onChange={handleChange}>
                 <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
                 <MenuItem value={"CUSTOMER"}>CUSTOMER</MenuItem>
                 <MenuItem value={"COMPANY"}>COMPANY</MenuItem>

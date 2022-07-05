@@ -45,7 +45,6 @@ function UpdateCoupon(): JSX.Element {
         })
         .catch(err=>{
             console.log(err)
-            msgNotify.error(err);
         })
         navigate("/company/getAllCompanyCoupons");
     }
@@ -95,7 +94,6 @@ function UpdateCoupon(): JSX.Element {
             navigate("/company/getAllCompanyCoupons");
         })
         .catch(err=>{
-            msgNotify.error("We got a problem");
             console.log(err);
         })
     }

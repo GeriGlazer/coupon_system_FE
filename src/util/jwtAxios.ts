@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import { updateToken } from '../redux/authState';
 import { store } from '../redux/store';
 
 const jwtAxios = axios.create();
@@ -13,9 +14,9 @@ jwtAxios.interceptors.request.use(request=>{
     return request;
 });
 
-{/*jwtAxios.interceptors.response.use(response=>{
+jwtAxios.interceptors.response.use(response=>{
     store.dispatch(updateToken(response.headers.authorization));
     return response;
-})*/}
+})
 
 export default jwtAxios;

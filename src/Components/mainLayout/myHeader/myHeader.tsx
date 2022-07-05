@@ -18,7 +18,7 @@ function MyHeader(): JSX.Element {
     }
 
     const checkIsLogin=()=>{
-        if(getState=='' || getState=="GUEST"){
+        if(getState==''){
             return(
             <>
                 <Button variant="contained" color="primary" onClick={goToLogin}>Login</Button>
