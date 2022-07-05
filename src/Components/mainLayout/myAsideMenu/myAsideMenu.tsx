@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { store } from "../../../redux/store";
 import "./myAsideMenu.css";
+import banner from "../../../assets/sideBanner.png"
 
 
 function MyAsideMenu(): JSX.Element {
@@ -51,7 +52,7 @@ const home = ()=>{
     return (
         <div className="myAsideMenu">
             <Button variant="contained" color="secondary" onClick={home} > Home </Button>
-            <br/><br/><br/><br/>
+            <br/><br/>
            {menu()}
         </div>
     );

@@ -8,11 +8,7 @@ import { useNavigate } from "react-router-dom";
 import jwtAxios from "../../../../util/jwtAxios";
 import globals from "../../../../util/globals";
 import msgNotify, { ErrMsg } from "../../../../util/notify";
-import {CustomerReducer,PurchaseCoupon, updateCustomer,} from "../../../../redux/customerState";
-import { downloadCoupons, removeAllCoupons } from "../../../../redux/couponState";
-import { useState } from "react";
-import { customer_details } from "../../../../modal/customer_details";
-
+import { updateCustomer,} from "../../../../redux/customerState";
 interface SingleCouponProps {
   coupon: Coupon_Details;
 }
@@ -44,15 +40,15 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
         customer.coupons=myCoupons;
         store.dispatch(updateCustomer(customer));
         console.log(coupon)
-        navigate("/customer/getCustomerCoupons");
-  }
-})
-.catch((err) => {
-  msgNotify.error(err);
-  console.log(err);
-  navigate("/")
-});
-}
+        navigate("/customer/customerMainPage");
+      }
+    })
+    .catch((err) => {
+      msgNotify.error(err);
+      console.log(err);
+      navigate("/")
+    });
+    }
   const getUpdateButton = () => {
     if (getUserType == "COMPANY") {
       return (
@@ -92,8 +88,12 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
     if(getUserType=="COMPANY"){
       return (
         <>
-        <b>amount:</b> {props.coupon.amount}
-        <br />
+          <b >ID:{props.coupon.id}</b> 
+          <b>amount:</b> {props.coupon.amount}
+          <br />
+          <b>Category:</b> {props.coupon.category}
+          <br />
+          <b>start date:</b> {props.coupon.startDate}
         </>
       )
     }
@@ -102,30 +102,28 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
   const getData = () => {
     return (
       <>
-        <b>id:</b> {props.coupon.id}
+        <img className="Image" src= {props.coupon.image} ></img>
+        <h6><b>{props.coupon.description}</b> </h6>
+        <div className="Container2">
+          <b>Price:{props.coupon.price}</b> 
+          <br />
+          {getAmount()}
+          <b className="Expire">Expires: {props.coupon.endDate}</b> 
+          <br />
+        </div>
         <br />
-        <b>category:</b> {props.coupon.category}
-        <br />
-        <b>description:</b> {props.coupon.description}
-        <br />
-        <b>price:</b> {props.coupon.price}
-        <br />
-        {getAmount()}
-        <b>start date:</b> {props.coupon.startDate}
-        <br />
-        <b>end date:</b> {props.coupon.endDate}
-        <br />
-        <b>image:</b> {props.coupon.image}
-        <br />
+        <b>{getUpdateButton()}</b>
+       
       </>
     );
   };
+
   return (
-    <div className="singleCoupon SolidBox">
-      <h2 style={{ textAlign: "center" }}>{props.coupon.title}</h2>
+    <div className="singleCoupon CouponBox">
+      <h3 className="Container" style={{ textAlign: "center" }}>{props.coupon.title}</h3>
       <hr />
       {getData()}
-      {getUpdateButton()}
+
     </div>
   );
 }

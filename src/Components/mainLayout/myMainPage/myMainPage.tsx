@@ -13,12 +13,14 @@ import "./myMainPage.css";
 function MyMainPage(): JSX.Element {
     const [coupons, setCoupons] = useState<Coupon_Details[]>([]);
 
+
     useEffect(()=>{
         jwtAxios.get<Coupon_Details[]>(globals.urls.guest)
         .then(response=>{
             setCoupons(response.data)
-console.log(response.data);
+            console.log(response.data);
             store.dispatch(downloadCoupons(response.data));
+            
         })
         .catch(err=>{
             msgNotify.error("No coupons in data base")

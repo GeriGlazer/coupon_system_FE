@@ -21,9 +21,9 @@ function MyHeader(): JSX.Element {
         if(getState==''){
             return(
             <>
-                <Button variant="contained" color="primary" onClick={goToLogin}>Login</Button>
-                
-                <Button variant="contained" color="primary" onClick={register} >Register</Button>
+                <Button  variant="contained" color="secondary" onClick={goToLogin}>Login</Button>
+                <span> </span>
+                <Button  variant="contained" color="secondary" onClick={register} >Register</Button>
             </>
             ) ;   
         }
@@ -40,7 +40,7 @@ function MyHeader(): JSX.Element {
 
 
     return (
-        <div className="myHeader text_right" >
+        <div className="myHeader botton-padding" >
 			{checkIsLogin()}
         </div>
     );

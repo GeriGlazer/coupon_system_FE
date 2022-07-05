@@ -5,7 +5,7 @@ export class Coupon_Details{
     description: string;
     endDate: string;
     id: number;
-    image: null;
+    image: string;
     price: number;
     startDate: string;
     title: string;

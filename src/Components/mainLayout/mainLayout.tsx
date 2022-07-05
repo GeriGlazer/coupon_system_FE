@@ -29,9 +29,9 @@ function MainLayout(): JSX.Element {
             <CssBaseline/>
             <BrowserRouter>
 
-                <header>
+                <header className="header-bg-color">
+                    <Button  color="secondary" onClick={darkMode} > dark mode </Button>
                     <MyHeader/>
-                    <Button onClick={darkMode} style={{textAlign:'left'}} > dark mode </Button>
                 </header>
                 <aside>
                     <MyAsideMenu/>
