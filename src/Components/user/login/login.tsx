@@ -35,7 +35,6 @@ function Login(): JSX.Element {
         msgNotify.success(SccMsg.LOGIN_APPROVED);
         dispatch(loginUser(response.headers.authorization));
         console.log(store.getState().AuthState.userType);
-        console.log(store.getState().AuthState.userEmail);
         if (store.getState().AuthState.userType === "ADMIN") {
           jwtAxios.get<company_details[]>(globals.urls.listCompanies)
             .then((response) => {
@@ -58,10 +57,6 @@ function Login(): JSX.Element {
             .then((response) => {
               let SingleCompany = response.data;
               store.dispatch(downloadSingleCompany(SingleCompany));
-            })
-            .catch((err) => {
-              msgNotify.error(err);
-              console.log(response.data);
             });
           navigate("/company/companyMainPage");
         }
@@ -70,10 +65,6 @@ function Login(): JSX.Element {
           .then((response)=>{
             let SingleCustomer= response.data;
             store.dispatch(downloadSingleCustomer(SingleCustomer));
-          })
-          .catch((err) => {
-            msgNotify.error(err);
-            console.log(response.data);
           });
           navigate("/");
         }

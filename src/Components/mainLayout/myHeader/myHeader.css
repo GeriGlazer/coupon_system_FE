@@ -1,9 +1,9 @@
 .myHeader {
 margin: 0;
-padding: 10px;
+padding: 0px;
 }
 
-.text_right{
+.botton-padding{
+    padding: 10px;
     text-align: right;
-    padding: 30px 30px 0px 0px;
-}
+  }
