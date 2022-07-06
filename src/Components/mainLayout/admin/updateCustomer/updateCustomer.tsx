@@ -44,7 +44,7 @@ function UpdateCustomer(): JSX.Element {
             }       
         })
         .catch(err=>{
-            msgNotify.error(err);
+            msgNotify.error(err.response.data.details);
         })
         goBack();
     }   

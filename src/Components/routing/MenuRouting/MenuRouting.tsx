@@ -2,8 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import AddCompany from "../../mainLayout/admin/addCompany/addCompany";
 import AddCustomer from "../../mainLayout/admin/addCustomer/addCustomer";
 import AdminMainPage from "../../mainLayout/admin/adminMainPage/adminMainPage";
-import DeleteCompany from "../../mainLayout/admin/deleteCompany/deleteCompany";
-import DeleteCustomer from "../../mainLayout/admin/deleteCustomer/deleteCustomer";
 import GetAllCompanies from "../../mainLayout/admin/getAllCompanies/getAllCompanies";
 import GetAllCustomers from "../../mainLayout/admin/getAllCustomers/getAllCustomers";
 import GetCustomer from "../../mainLayout/admin/getCustomer/getCustomer";
@@ -21,15 +19,15 @@ import GetCustomerCoupons from "../../mainLayout/customer/getCustomerCoupons/get
 import GetCustomerCouponsByCategory from "../../mainLayout/customer/getCustomerCouponsByCategory/getCustomerCouponsByCategory";
 import GetCustomerCouponsByMoney from "../../mainLayout/customer/getCustomerCouponsByMoney/getCustomerCouponsByMoney";
 import GetCustomerDetails from "../../mainLayout/customer/getCustomerDetails/getCustomerDetails";
-import PurchaseCoupon from "../../mainLayout/customer/purchaseCoupon/purchaseCoupon";
 import MyMainPage from "../../mainLayout/myMainPage/myMainPage";
 import Login from "../../user/login/login";
 import Page404 from "../../user/page404/page404";
 import "./MenuRouting.css";
 import CompanyMainPage from './../../mainLayout/company/companyMainPage/companyMainPage';
 import CustomerMainPage from "../../mainLayout/customer/customerMainPage/customerMainPage";
-import UpdatePassword from './../../mainLayout/company/updatePassword/updatePassword';
 import Register from "../../user/register/register";
+import CompanyUpdateCompany from "../../mainLayout/company/companyUpdateCompany/companyUpdateCompany";
+import CustomerUpdateCustomer from "../../mainLayout/customer/customerUpdateCustomer/customerUpdateCustomer";
 
 function MenuRouting(): JSX.Element {
     return (
@@ -39,8 +37,6 @@ function MenuRouting(): JSX.Element {
                 <Route path="admin/adminMainPage" element={<AdminMainPage/>}/>
                 <Route path="guest/addCompany" element={<AddCompany/>}/>
                 <Route path="guest/addCustomer" element={<AddCustomer/>}/>
-                <Route path="admin/deleteCompany" element={<DeleteCompany/>}/>
-                <Route path="admin/deleteCustomer" element={<DeleteCustomer/>}/>
                 <Route path="admin/getAllCompanies" element={<GetAllCompanies/>}/>
                 <Route path="admin/getAllCustomers" element={<GetAllCustomers/>}/>
                 <Route path="admin/oneCustomer" element={<GetCustomer/>}/>
@@ -57,6 +53,8 @@ function MenuRouting(): JSX.Element {
                 <Route path="company/getCouponsByCategory" element={<GetCouponByCategory/>}/>
                 <Route path="company/getCouponsByMaxPrice" element={<GetCouponsByMaxPrice/>}/>
                 <Route path="company/updateCoupon" element={<UpdateCoupon/>}/>
+                <Route path="company/companyUpdateCompany" element={<CompanyUpdateCompany/>}/>
+
 
                 {/* Customer */}
                 <Route path="customer/customerMainPage" element={<CustomerMainPage/>}/>
@@ -64,7 +62,8 @@ function MenuRouting(): JSX.Element {
                 <Route path="customer/getCustomerCouponsByCategory" element={<GetCustomerCouponsByCategory/>}/>
                 <Route path="customer/getCustomerCouponsByMaxPrice" element={<GetCustomerCouponsByMoney/>}/>
                 <Route path="customer/getCustomerDetails" element={<GetCustomerDetails/>}/>
-                <Route path="customer/purchaseCoupon" element={<PurchaseCoupon/>}/>
+                <Route path="customer/customerUpdateCustomer" element={<CustomerUpdateCustomer/>}/>
+
 
                 {/* General */}
                 <Route path="login" element={<Login/>}/>

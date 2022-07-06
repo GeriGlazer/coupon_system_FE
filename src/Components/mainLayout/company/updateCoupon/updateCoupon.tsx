@@ -44,16 +44,10 @@ function UpdateCoupon(): JSX.Element {
             store.dispatch(updateCoupon(coupon));
         })
         .catch(err=>{
-            console.log(err)
-            msgNotify.error(err);
+            msgNotify.error(err.response.data.details);
         })
         navigate("/company/getAllCompanyCoupons");
     }
-
-    // const handleImputChange = (event:any)=>{
-    //    const {name, value} = event.target;
-    //    setValues({...values, [name]: value,});
-    // }
 
     const categoryChange = (args: SyntheticEvent)=>{
         coupon.category = (args.target as HTMLInputElement).value;

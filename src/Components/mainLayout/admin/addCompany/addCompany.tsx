@@ -55,7 +55,7 @@ function AddCompany(): JSX.Element {
 
       .catch((err) => {
         msgNotify.error(err);
-        console.log(err);
+        console.log(err.response.data.details);
       });
   };
 

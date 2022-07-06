@@ -3,7 +3,7 @@ import "./myFooter.css";
 function MyFooter(): JSX.Element {
     return (
         <div className="myFooter">
-			footer section
+			GYGN coupons ltd. &reg
         </div>
     );
 }

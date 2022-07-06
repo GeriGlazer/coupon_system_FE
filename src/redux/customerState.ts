@@ -56,7 +56,7 @@ export function CustomerReducer (currentState: CustomerState = new CustomerState
             newState.customer.push(action.payload);
         break;
         case CustomerActionType.updateCustomer:
-            var updateCustomer = [...newState.customer].filter(item=>item.id!==action.payload.id);
+            var updateCustomer = [...newState.customer].filter(item=>item.id!=action.payload.id);
             updateCustomer.push(action.payload);
             newState.customer = updateCustomer;
         break;
@@ -70,10 +70,6 @@ export function CustomerReducer (currentState: CustomerState = new CustomerState
             newState.customer=[];
             newState.customer.push(action.payload);
         break;
-        // case CustomerActionType.PurchaseCoupon:
-        //     let coupon = action.payload;
-        //     newState.customer[0].coupons.push(coupon);
-        // break;
         case CustomerActionType.removeAllCustomers:
             newState.customer = [];
         break;

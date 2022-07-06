@@ -42,7 +42,7 @@ function UpdateCompany(): JSX.Element {
             }       
         })
         .catch(err=>{
-            msgNotify.error(err);
+            msgNotify.error(err.response.data.details);
         })
         goBack();
     }
@@ -60,8 +60,7 @@ function UpdateCompany(): JSX.Element {
                 navigate("/admin/getAllCompanies");
         })
         .catch(err=>{
-            msgNotify.error("We got a problem");
-            console.log(err);
+            msgNotify.error(err.response.data.details);
         })
     }
     const emailChange = (args:SyntheticEvent)=>{

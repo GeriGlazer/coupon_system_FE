@@ -13,34 +13,14 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
     const getUserType = store.getState().AuthState.userType;
     const navigate = useNavigate();
     const updateCustomer = ()=>{
-        navigate("/admin/updateCustomer/", {state:{customerId:props.customer.id}} );
+        if(getUserType == "ADMIN"){
+            navigate("/admin/updateCustomer/", {state:{customerId:props.customer.id}} );
+        }else{
+            navigate("/customer/customerUpdateCustomer/", {state:{customerId:props.customer.id}});     
+        }
     }
     const couponsList = ()=>{
         navigate("/customer/getCustomerCoupons", {state:{customerId:props.customer.id}})
-    }
-
-    const showButtons = ()=>{
-        if (getUserType == "CUSTOMER"){
-            return(
-                <>
-                <br/><br/>
-                <Button color="primary" onClick={couponsList}>Coupons</Button>
-                <br/><br/>
-                </>
-            )
-        }
-        else {
-            return(
-                <>
-                <br/><br/>
-                <ButtonGroup variant="contained" fullWidth>
-                    <Button color="primary" onClick={couponsList}>Coupons</Button>
-                    <Button color="secondary" onClick={updateCustomer} >Edit Customer</Button>
-                </ButtonGroup>
-                <br/><br/>
-                </>
-            )
-        }
     }
 
     return (
@@ -48,7 +28,10 @@ function SingleCustomer(props: SingleCustomerProps): JSX.Element {
 			  <h2 style={{textAlign: "center"}}></h2>{props.customer.id}<hr/><br/>
             {props.customer.firstName + " " + props.customer.lastName}<br/><br/>
             {props.customer.email}<br/><br/>
-            {showButtons()}
+            <ButtonGroup variant="contained" fullWidth>
+                <Button color="primary" onClick={couponsList}>Coupons</Button>
+                <Button color="secondary" onClick={updateCustomer} >Edit Customer</Button>
+            </ButtonGroup>
         </div>
     );
 }
