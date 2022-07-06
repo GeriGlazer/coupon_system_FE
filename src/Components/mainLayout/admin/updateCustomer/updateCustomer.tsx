@@ -39,7 +39,7 @@ function UpdateCustomer(): JSX.Element {
             }       
         })
         .catch(err=>{
-            console.log(err);
+            msgNotify.error(err.response.data.details);
         })
         goBack();
     }   
@@ -55,7 +55,7 @@ function UpdateCustomer(): JSX.Element {
             }
         })
         .catch(err=>{
-            console.log(err);
+            msgNotify.error(err.response.data.details);
         })
         goBack();
     }

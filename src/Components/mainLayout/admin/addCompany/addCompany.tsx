@@ -54,7 +54,7 @@ function AddCompany(): JSX.Element {
         }
       })
       .catch((err) => {
-        console.log(err);
+        msgNotify.error(err.response.data.details);
       });
   };
 

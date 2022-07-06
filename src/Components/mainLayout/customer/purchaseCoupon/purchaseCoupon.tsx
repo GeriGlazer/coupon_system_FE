@@ -12,9 +12,6 @@ function PurchaseCoupon(): JSX.Element {
             msgNotify.error(ErrMsg.NO_LOGIN);
             navigate("/login");
         }
-        /*.catch(err=>{
-            msgNotify.error(err);
-        })*/
     }, []);
 
 

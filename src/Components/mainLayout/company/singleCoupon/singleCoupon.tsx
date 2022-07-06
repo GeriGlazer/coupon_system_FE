@@ -43,8 +43,7 @@ function SingleCoupon(props: SingleCouponProps): JSX.Element {
       }
     })
     .catch((err) => {
-      msgNotify.error(err);
-      console.log(err);
+      msgNotify.error(err.response.data.details);
       navigate("/")
     });
     }

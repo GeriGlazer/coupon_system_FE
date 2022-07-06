@@ -4,6 +4,7 @@
     display: grid;
     grid-template-rows: [myHeader] 80px [myMainPage] 1fr [myFooter] 50px;
     grid-template-columns: [myAsideMenu] 150px [myMainPage] 1fr;
+    background-color: #fba9058a;
 }
 
 .mainLayout>header, .mainLayout>footer{
@@ -16,9 +17,11 @@
     overflow: auto;
 }
 .mainLayout>aside{
-    background-color: #fbdb05;
-    background-image: url(https://preview.pixlr.com/images/800wm/100/1/1001452205.jpg);
+    background-color: #fba9058a;
+    background-image: url(https://preview.pixlr.com/images/800wm/100/1/1001452205.jpg) ;
+    opacity: 0.6;
+    
 }
 .mainLayout>header{
-    background-color: #fbdb05; 
+    background-color: #fba9058a; 
 }

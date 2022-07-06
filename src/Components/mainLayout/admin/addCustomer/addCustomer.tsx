@@ -32,8 +32,7 @@ function AddCustomer(): JSX.Element {
             }
         })
         .catch(err => {
-            console.log(err);
-            msgNotify.error(err);
+            msgNotify.error(err.response.data.details);
         })
         .then(()=>{
             if(getUserType=="ADMIN"){
@@ -53,7 +52,7 @@ function AddCustomer(): JSX.Element {
             }   
         })
         .catch(err => {
-            console.log(err);
+            msgNotify.error(err.response.data.details);
         })
     }
 

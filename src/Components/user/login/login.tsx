@@ -41,14 +41,14 @@ function Login(): JSX.Element {
               store.dispatch(downloadCompanies(response.data));
             })
             .catch((err) => {
-              msgNotify.error("No companies in the system");
+              msgNotify.error(err.response.data.details);
             });
           jwtAxios.get<customer_details[]>(globals.urls.listCustomers)
             .then((response) => {
               store.dispatch(downloadCustomers(response.data));
             })
             .catch((err) => {
-              msgNotify.error("No customers in the system");
+              msgNotify.error(err.response.data.details);
             });
           navigate("/admin/adminMainPage");
         }
@@ -70,8 +70,7 @@ function Login(): JSX.Element {
         }
       })
       .catch((err) => {
-        msgNotify.error(err);
-        console.log(err);
+        msgNotify.error(err.response.data.details);
       });
   };
 

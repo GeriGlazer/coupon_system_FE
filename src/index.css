@@ -8,11 +8,12 @@ html, body, #root {
 .CouponBox{
   display: inline-block;
   text-align: left;
+  align-items: center;
   border: 6px dashed #da30f4dd;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 300px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .SolidBox{
@@ -26,7 +27,7 @@ html, body, #root {
 }
 .Container{
   padding: 2px 16px;
-  background-color: #fbdb05;
+  background-color: #fbda059d;
   color: rgb(156, 28, 135);
 }
 .Container1{
@@ -42,7 +43,7 @@ html, body, #root {
 }
 
 .Image{
-  position: relative;
+  position: center;
   left:auto;
   height: 200px;;
   width: fit-content;

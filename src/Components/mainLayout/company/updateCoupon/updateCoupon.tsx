@@ -44,7 +44,7 @@ function UpdateCoupon(): JSX.Element {
             store.dispatch(updateCoupon(coupon));
         })
         .catch(err=>{
-            console.log(err)
+            msgNotify.error(err.response.data.details);
         })
         navigate("/company/getAllCompanyCoupons");
     }
