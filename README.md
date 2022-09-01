@@ -1,3 +1,7 @@
+# This is the Front End Development for the Coupon System project phase 3
+  
+  To visit the app please view: couponent.herokuapp.com
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
