@@ -1,6 +1,6 @@
 # This is the Front End Development for the Coupon System project phase 3
   
-  To visit the app please view: couponent.herokuapp.com
+  To visit the app please view: **couponent.herokuapp.com**
 
 # Getting Started with Create React App
 
